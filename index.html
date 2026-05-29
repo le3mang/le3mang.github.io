@@ -1,1834 +1,1464 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Wedding of Sixtin & Sofyan</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Gilded Atelier — Sixtin & Sofyan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════ */
+:root {
+  --ivory:       #F4EFEA;
+  --ivory-deep:  #EDE4D8;
+  --ivory-dark:  #D9CDB8;
+  --burgundy:    #4A0E17;
+  --burgundy-mid:#6B1525;
+  --burgundy-lit:#8B2035;
+  --gold:        #D4AF37;
+  --gold-deep:   #AA7C11;
+  --gold-light:  #F0D060;
+  --gold-pale:   #E8C85A;
+  --emerald:     #097969;
+  --emerald-dark:#065A4D;
+  --sage:        #8A9A86;
+  --sage-dark:   #6B7A67;
+  --ink:         #1A0A0D;
+  --parchment:   #F0E6CC;
+  --parchment-dk:#D8C9A8;
+}
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+/* ═══════════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--burgundy);
+  color: var(--ivory);
+  font-family: 'Cormorant Garamond', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
 
-  <!-- GSAP CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+/* ═══════════════════════════════════════════════════════
+   CANVAS TEXTURE OVERLAY (global)
+═══════════════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+}
 
-  <style>
-    /* ============================================
-       CSS CUSTOM PROPERTIES & RESET
-    ============================================ */
-    :root {
-      --navy: #0B1325;
-      --navy-mid: #0f1d35;
-      --emerald: #1C3124;
-      --emerald-light: #244030;
-      --gold: #D4AF37;
-      --gold-light: #e8cc6e;
-      --gold-dim: #a8882a;
-      --ivory: #FDFBF7;
-      --ivory-dim: #e8e0cc;
-      --font-display: 'Cinzel Decorative', serif;
-      --font-body: 'Cormorant Garamond', serif;
-      --font-text: 'EB Garamond', serif;
-    }
+/* ═══════════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--burgundy); }
+::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════════════════
+   TYPOGRAPHY HELPERS
+═══════════════════════════════════════════════════════ */
+.font-cinzel    { font-family: 'Cinzel Decorative', serif; }
+.font-cinzel-sm { font-family: 'Cinzel', serif; }
+.font-script    { font-family: 'Pinyon Script', cursive; }
+.font-cormorant { font-family: 'Cormorant Garamond', serif; }
+.font-lora      { font-family: 'Lora', serif; }
 
-    html { scroll-behavior: smooth; }
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-light) 30%, var(--gold) 50%, var(--gold-pale) 70%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: goldShift 5s ease infinite;
+}
+@keyframes goldShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
 
-    body {
-      background-color: var(--navy);
-      color: var(--ivory);
-      font-family: var(--font-body);
-      overflow-x: hidden;
-    }
+/* ═══════════════════════════════════════════════════════
+   CONTAINER
+═══════════════════════════════════════════════════════ */
+.atelier-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+/* ═══════════════════════════════════════════════════════
+   BRUSH STROKE WIPE TRANSITION
+═══════════════════════════════════════════════════════ */
+#brush-wipe {
+  position: fixed; inset: 0; z-index: 8000;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s;
+}
+#brush-wipe.active { opacity: 1; visibility: visible; }
+#brush-wipe .stroke {
+  flex: 1;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+#brush-wipe .stroke:nth-child(odd)  { transform-origin: left; }
+#brush-wipe .stroke:nth-child(even) { transform-origin: right; }
+#brush-wipe.sweep .stroke {
+  animation: brushIn 0.25s ease forwards;
+}
+#brush-wipe.sweep .stroke:nth-child(2) { animation-delay: 0.03s; }
+#brush-wipe.sweep .stroke:nth-child(3) { animation-delay: 0.06s; }
+#brush-wipe.sweep .stroke:nth-child(4) { animation-delay: 0.09s; }
+#brush-wipe.sweep .stroke:nth-child(5) { animation-delay: 0.12s; }
+#brush-wipe.reveal .stroke {
+  transform: scaleX(1);
+  animation: brushOut 0.3s ease forwards;
+}
+#brush-wipe.reveal .stroke:nth-child(2) { animation-delay: 0.04s; }
+#brush-wipe.reveal .stroke:nth-child(3) { animation-delay: 0.08s; }
+#brush-wipe.reveal .stroke:nth-child(4) { animation-delay: 0.12s; }
+#brush-wipe.reveal .stroke:nth-child(5) { animation-delay: 0.16s; }
+@keyframes brushIn  { to { transform: scaleX(1); } }
+@keyframes brushOut { to { transform: scaleX(0); } }
 
-    /* ============================================
-       COVER OVERLAY TRANSITION
-    ============================================ */
-    #cover-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--navy);
-      z-index: 9999;
-      transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
-      transform-origin: top;
-    }
-    #cover-overlay.slide-up { transform: translateY(-100%); }
+/* ═══════════════════════════════════════════════════════
+   SECTION 1 — COVER
+═══════════════════════════════════════════════════════ */
+#section-cover {
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--ivory);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* ============================================
-       STARS CANVAS
-    ============================================ */
-    #stars-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
+/* Canvas texture bg for ivory sections */
+.canvas-bg {
+  background-color: var(--ivory);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.55' numOctaves='4' seed='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 20%, rgba(212,175,55,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse at 80% 80%, rgba(74,14,23,0.06) 0%, transparent 60%);
+}
 
-    /* ============================================
-       MIST EFFECT
-    ============================================ */
-    .mist-layer {
-      position: absolute;
-      bottom: 0; left: -20%;
-      width: 140%;
-      height: 180px;
-      background: radial-gradient(ellipse at 50% 100%, rgba(28,49,36,0.6) 0%, transparent 70%);
-      animation: mistFloat 8s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-    @keyframes mistFloat {
-      0% { transform: translateX(0) scaleY(1); opacity: 0.4; }
-      100% { transform: translateX(30px) scaleY(1.15); opacity: 0.7; }
-    }
+.burgundy-bg {
+  background-color: var(--burgundy);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+}
 
-    /* ============================================
-       GOLD GRADIENT TEXT
-    ============================================ */
-    .gold-text {
-      background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold-light) 40%, var(--gold) 60%, var(--gold-light) 80%, var(--gold-dim) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% 200%;
-      animation: goldShimmer 4s ease-in-out infinite;
-    }
-    @keyframes goldShimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
+.sage-bg {
+  background-color: #5C6B58;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.55' numOctaves='4' seed='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+}
 
-    /* ============================================
-       SVG BORDER ANIMATION
-    ============================================ */
-    .border-draw {
-      stroke-dasharray: 2000;
-      stroke-dashoffset: 2000;
-      animation: drawLine 3s ease forwards 0.5s;
-    }
-    @keyframes drawLine {
-      to { stroke-dashoffset: 0; }
-    }
+/* Oil wash overlay */
+#section-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(212,175,55,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 85%, rgba(74,14,23,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(26,10,13,0.08) 100%);
+  pointer-events: none;
+}
 
-    /* ============================================
-       PULSE BUTTON
-    ============================================ */
-    .pulse-btn {
-      position: relative;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold);
-      font-family: var(--font-body);
-      letter-spacing: 0.2em;
-      cursor: pointer;
-      overflow: visible;
-      transition: all 0.3s ease;
-    }
-    .pulse-btn::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border: 1px solid var(--gold);
-      border-radius: inherit;
-      opacity: 0;
-      animation: pulseAura 2s ease-in-out infinite;
-    }
-    .pulse-btn::after {
-      content: '';
-      position: absolute;
-      inset: -12px;
-      border: 1px solid var(--gold);
-      border-radius: inherit;
-      opacity: 0;
-      animation: pulseAura 2s ease-in-out infinite 0.4s;
-    }
-    .pulse-btn:hover {
-      background: rgba(212,175,55,0.15);
-      box-shadow: 0 0 30px rgba(212,175,55,0.4);
-    }
-    @keyframes pulseAura {
-      0% { opacity: 0.6; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.3); }
-    }
+/* Baroque SVG frame container */
+.baroque-frame-outer {
+  position: relative;
+  width: min(340px, 85vw);
+  margin: 0 auto;
+}
+.baroque-frame-svg {
+  position: absolute;
+  inset: -28px;
+  width: calc(100% + 56px);
+  height: calc(100% + 56px);
+  pointer-events: none;
+  z-index: 2;
+}
+.portrait-canvas {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    inset 0 0 40px rgba(26,10,13,0.4),
+    0 20px 60px rgba(26,10,13,0.5),
+    0 0 0 1px rgba(212,175,55,0.3);
+}
 
-    /* ============================================
-       FIREFLIES
-    ============================================ */
-    .firefly {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fff 0%, var(--gold) 40%, transparent 70%);
-      pointer-events: none;
-    }
+/* Oil painting portrait (CSS art) */
+.oil-portrait {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 15%, #3D1A0A 0%, #1A0805 40%),
+    linear-gradient(175deg, #2A1208 0%, #1A0805 100%);
+}
 
-    /* ============================================
-       SECTION BACKGROUNDS
-    ============================================ */
-    .section-emerald {
-      background: radial-gradient(ellipse at 30% 50%, #1c3124 0%, #0f1e14 50%, #0B1325 100%);
-    }
-    .section-navy {
-      background: radial-gradient(ellipse at 70% 30%, #0f1d35 0%, #0B1325 60%);
-    }
+/* Chiaroscuro light effect */
+.oil-portrait::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 55% 30%, rgba(255,220,150,0.45) 0%, rgba(255,180,80,0.12) 35%, transparent 60%),
+    radial-gradient(ellipse at 35% 28%, rgba(255,200,120,0.35) 0%, transparent 40%);
+  z-index: 3; pointer-events: none;
+  mix-blend-mode: screen;
+}
+.oil-portrait::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0,0,0,0.55) 100%);
+  z-index: 4; pointer-events: none;
+}
 
-    /* ============================================
-       CARD STYLES
-    ============================================ */
-    .event-card {
-      border: 1px solid rgba(212,175,55,0.3);
-      background: rgba(11,19,37,0.7);
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .event-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, transparent 50%, rgba(212,175,55,0.05) 100%);
-      pointer-events: none;
-    }
-    .event-card:hover { border-color: rgba(212,175,55,0.7); transform: translateY(-4px); }
+/* SVG Couple figures */
+.couple-svg {
+  position: absolute; inset: 0; z-index: 2;
+  width: 100%; height: 100%;
+}
 
-    /* ============================================
-       COUNTDOWN NUMBERS
-    ============================================ */
-    .countdown-num {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 6vw, 4rem);
-      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: inline-block;
-      min-width: 2ch;
-      text-align: center;
-      transition: opacity 0.3s ease;
-    }
-    .countdown-label {
-      font-family: var(--font-text);
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--ivory-dim);
-      opacity: 0.7;
-    }
+/* Wood plaque for guest name */
+.wood-plaque {
+  margin: 18px auto 0;
+  max-width: 320px;
+  background:
+    linear-gradient(175deg, #7A4A1A 0%, #5C3310 30%, #7A5020 60%, #5C3310 100%);
+  border: 2px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: 12px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.2), inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+.wood-plaque::before {
+  content: '';
+  position: absolute; inset: 3px;
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 2px;
+  pointer-events: none;
+}
+/* Wood grain lines */
+.wood-plaque::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 3px;
+  background: repeating-linear-gradient(
+    92deg,
+    transparent 0px, transparent 8px,
+    rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px
+  );
+  pointer-events: none;
+}
 
-    /* ============================================
-       MAPS IFRAME GOLD FRAME
-    ============================================ */
-    .map-frame {
-      border: 2px solid transparent;
-      background: linear-gradient(var(--navy), var(--navy)) padding-box,
-                  linear-gradient(135deg, var(--gold-dim), var(--gold-light), var(--gold-dim)) border-box;
-      animation: mapGlow 3s ease-in-out infinite alternate;
-    }
-    @keyframes mapGlow {
-      0% { box-shadow: 0 0 15px rgba(212,175,55,0.2), 0 0 30px rgba(212,175,55,0.1); }
-      100% { box-shadow: 0 0 25px rgba(212,175,55,0.4), 0 0 50px rgba(212,175,55,0.2); }
-    }
+/* Cover Typography */
+.cover-label {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  letter-spacing: 0.35em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  text-shadow: 0 0 30px rgba(212,175,55,0.4);
+}
+.cover-names {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(3.2rem, 10vw, 5rem);
+  color: var(--gold);
+  text-shadow:
+    0 2px 8px rgba(26,10,13,0.5),
+    0 0 40px rgba(212,175,55,0.35);
+  line-height: 1;
+}
 
-    /* ============================================
-       TIMELINE LINE DRAW
-    ============================================ */
-    #timeline-line {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      top: 0;
-      height: 100%;
-      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dim) 100%);
-      transform-origin: top;
-      scaleY: 0;
-    }
-    .timeline-star {
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #fff 0%, var(--gold) 40%, transparent 70%);
-      border-radius: 50%;
-      animation: starPulse 2s ease-in-out infinite;
-    }
-    @keyframes starPulse {
-      0%, 100% { box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(212,175,55,0.4); }
-      50% { box-shadow: 0 0 16px var(--gold), 0 0 32px rgba(212,175,55,0.6); }
-    }
+/* Open Button */
+.open-btn {
+  position: relative;
+  background: var(--burgundy);
+  border: 1.5px solid var(--gold-deep);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px 38px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.15), 0 8px 30px rgba(74,14,23,0.5);
+}
+.open-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg,
+    transparent 0%, transparent 40%,
+    rgba(212,175,55,0.35) 50%,
+    rgba(240,208,96,0.2) 55%,
+    transparent 65%, transparent 100%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  animation: shimmerSlide 3s ease infinite;
+}
+@keyframes shimmerSlide {
+  0%,40%  { background-position: -100% 0; }
+  60%,100%{ background-position: 200% 0; }
+}
+.open-btn::after {
+  content: '';
+  position: absolute; inset: 4px;
+  border: 1px solid rgba(212,175,55,0.2);
+  pointer-events: none;
+}
+.open-btn:hover {
+  background: var(--burgundy-mid);
+  box-shadow: 0 0 30px rgba(212,175,55,0.3), 0 8px 30px rgba(74,14,23,0.6);
+  transform: translateY(-2px);
+}
 
-    /* ============================================
-       RSVP FORM
-    ============================================ */
-    .rsvp-input {
-      background: rgba(11,19,37,0.8);
-      border: 1px solid rgba(212,175,55,0.3);
-      color: var(--ivory);
-      font-family: var(--font-text);
-      font-size: 1rem;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .rsvp-input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(36,64,48,0.5), 0 0 20px rgba(212,175,55,0.2);
-    }
-    .rsvp-input option { background: var(--navy); color: var(--ivory); }
+/* ═══════════════════════════════════════════════════════
+   SECTION 2 — OVERTURE (PEMBUKA)
+═══════════════════════════════════════════════════════ */
+#section-pembuka {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* ============================================
-       GUESTBOOK MESSAGE CARD
-    ============================================ */
-    .wish-card {
-      background: rgba(253,251,247,0.06);
-      border: 1px solid rgba(212,175,55,0.2);
-      backdrop-filter: blur(8px);
-      font-family: var(--font-text);
-      font-style: italic;
-      position: relative;
-    }
-    .wish-card::before {
-      content: '\201C';
-      font-size: 4rem;
-      color: rgba(212,175,55,0.15);
-      position: absolute;
-      top: -10px; left: 10px;
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
+/* Dense floral corners */
+.floral-corner {
+  position: absolute;
+  width: 200px; height: 200px;
+  pointer-events: none;
+}
+.floral-corner.tl { top: -10px; left: -10px; }
+.floral-corner.tr { top: -10px; right: -10px; transform: scaleX(-1); }
+.floral-corner.bl { bottom: -10px; left: -10px; transform: scaleY(-1); }
+.floral-corner.br { bottom: -10px; right: -10px; transform: scale(-1); }
 
-    /* ============================================
-       SHOOTING STAR ANIMATION
-    ============================================ */
-    .shooting-star {
-      position: fixed;
-      width: 3px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-    }
-    .shooting-star::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
+/* Brush stroke dividers */
+.brush-divider {
+  width: 100%;
+  height: 24px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24'%3E%3Cpath d='M0 12 Q50 4 100 12 Q150 20 200 12 Q250 4 300 12 Q350 20 400 12' fill='none' stroke='%23AA7C11' stroke-width='2' opacity='0.7'/%3E%3Cpath d='M0 12 Q50 18 100 12 Q150 6 200 12 Q250 18 300 12 Q350 6 400 12' fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.4'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  margin: 1.5rem 0;
+}
 
-    /* ============================================
-       DIGITAL GIFT CARD
-    ============================================ */
-    .gift-card {
-      border: 1px solid rgba(212,175,55,0.3);
-      background: linear-gradient(135deg, rgba(11,19,37,0.9) 0%, rgba(28,49,36,0.4) 100%);
-      animation: giftFloat 4s ease-in-out infinite;
-      backdrop-filter: blur(8px);
-    }
-    .gift-card:nth-child(2) { animation-delay: 1s; }
-    .gift-card:nth-child(3) { animation-delay: 2s; }
-    @keyframes giftFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
+/* Arabic salam */
+.salam-arabic {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--gold);
+  text-align: center;
+  text-shadow: 0 0 20px rgba(212,175,55,0.35);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
 
-    /* ============================================
-       COPY BUTTON SPARKLE
-    ============================================ */
-    .sparkle-particle {
-      position: absolute;
-      pointer-events: none;
-      font-size: 0.6rem;
-      animation: sparkleFly 0.8s ease-out forwards;
-    }
-    @keyframes sparkleFly {
-      0% { opacity: 1; transform: translate(0,0) scale(1); }
-      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
-    }
+/* Quran box */
+.quran-frame {
+  position: relative;
+  border: 1px solid rgba(212,175,55,0.35);
+  padding: 28px 32px;
+  margin: 0 auto;
+  max-width: 580px;
+  background: rgba(26,10,13,0.4);
+  backdrop-filter: blur(2px);
+}
+.quran-frame::before, .quran-frame::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(212,175,55,0.18);
+}
+.quran-frame::before { inset: 6px; }
+.quran-frame::after  { inset: 3px; border-color: rgba(212,175,55,0.1); }
 
-    /* ============================================
-       CLOSING SECTION CONSTELLATION ROTATION
-    ============================================ */
-    .milky-way-bg {
-      position: absolute;
-      inset: 0;
-      animation: milkyWayRotate 60s linear infinite;
-      transform-origin: center;
-      pointer-events: none;
-    }
+/* Ornamental corner dots */
+.quran-frame .corner {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold-deep);
+  opacity: 0.8;
+}
+.quran-frame .corner.tl { top: -5px; left: -5px; }
+.quran-frame .corner.tr { top: -5px; right: -5px; }
+.quran-frame .corner.bl { bottom: -5px; left: -5px; }
+.quran-frame .corner.br { bottom: -5px; right: -5px; }
 
-    /* ============================================
-       FOOTER CREDIT
-    ============================================ */
-    .footer-credit {
-      animation: breathe 3s ease-in-out infinite;
-    }
-    @keyframes breathe {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.7; }
-    }
+/* ═══════════════════════════════════════════════════════
+   FLOATING MUSIC PLAYER
+═══════════════════════════════════════════════════════ */
+#music-toggle {
+  position: fixed;
+  bottom: 1.5rem; right: 1.5rem;
+  z-index: 1000;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-deep);
+  background: radial-gradient(circle at 40% 35%, #2A0810, #1A0508);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 4px rgba(212,175,55,0.1);
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+#music-toggle:hover {
+  box-shadow: 0 4px 24px rgba(212,175,55,0.4), 0 0 0 4px rgba(212,175,55,0.2);
+}
+#music-toggle.spinning { animation: vinylSpin 4s linear infinite; }
+@keyframes vinylSpin { to { transform: rotate(360deg); } }
+#music-toggle svg { animation: vinylCounter 4s linear infinite paused; }
+#music-toggle.spinning svg { animation-play-state: running; }
+@keyframes vinylCounter { to { transform: rotate(-360deg); } }
 
-    /* ============================================
-       BRIDE & GROOM SILHOUETTES
-    ============================================ */
-    .bride-dress {
-      animation: dressWave 3s ease-in-out infinite;
-      transform-origin: bottom center;
-    }
-    @keyframes dressWave {
-      0%, 100% { transform: skewX(0deg); }
-      25% { transform: skewX(1.5deg); }
-      75% { transform: skewX(-1.5deg); }
-    }
-    .gold-dust-particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: var(--gold);
-      pointer-events: none;
-      animation: dustRise var(--dur, 3s) ease-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-    @keyframes dustRise {
-      0% { opacity: 0.8; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-80px) scale(0) translateX(var(--dx, 0px)); }
-    }
-    .groom-breathe {
-      animation: groomBreath 4s ease-in-out infinite;
-      transform-origin: bottom center;
-    }
-    @keyframes groomBreath {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(1.02); }
-    }
+/* Vinyl grooves */
+#music-toggle::before {
+  content: '';
+  position: absolute; inset: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.15);
+  box-shadow:
+    inset 0 0 0 4px rgba(212,175,55,0.08),
+    inset 0 0 0 8px rgba(212,175,55,0.05);
+}
 
-    /* ============================================
-       ASTROLABE ROTATION
-    ============================================ */
-    .astrolabe-outer { animation: astrolabeRotate 30s linear infinite; transform-origin: center; }
-    .astrolabe-inner { animation: astrolabeRotate 20s linear infinite reverse; transform-origin: center; }
-    @keyframes astrolabeRotate { to { transform: rotate(360deg); } }
+/* ═══════════════════════════════════════════════════════
+   SECTION 3 — PROFIL MEMPELAI
+═══════════════════════════════════════════════════════ */
+#section-profil {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
 
-    /* ============================================
-       MUSIC TOGGLE
-    ============================================ */
-    #music-toggle {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 1000;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(212,175,55,0.6);
-      background: rgba(11,19,37,0.85);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(8px);
-      animation: musicSpin 8s linear infinite;
-      transition: box-shadow 0.3s ease;
-    }
-    #music-toggle:hover {
-      box-shadow: 0 0 20px rgba(212,175,55,0.5);
-    }
-    @keyframes musicSpin {
-      to { transform: rotate(360deg); }
-    }
-    #music-toggle svg { animation: musicSpinReverse 8s linear infinite; }
-    @keyframes musicSpinReverse { to { transform: rotate(-360deg); } }
+/* Oil splatter decoration */
+.oil-splatter {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.12;
+}
 
-    /* ============================================
-       MAX-WIDTH CONTAINER
-    ============================================ */
-    .invitation-container {
-      max-width: 680px;
-      margin: 0 auto;
-      width: 100%;
-    }
+/* Oval frame portrait */
+.oval-frame-wrap {
+  position: relative;
+  width: min(200px, 50vw);
+  margin: 0 auto;
+  will-change: transform;
+}
+.oval-portrait {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 50% / 45%;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 3px var(--gold-deep),
+    0 0 0 8px rgba(212,175,55,0.15),
+    0 0 0 10px var(--gold-deep),
+    0 10px 40px rgba(0,0,0,0.5);
+}
+.oval-portrait-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+/* Ampersand connector */
+.couple-and {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(6rem, 18vw, 10rem);
+  color: var(--gold);
+  text-shadow:
+    2px 2px 0 var(--gold-deep),
+    0 0 50px rgba(212,175,55,0.3);
+  line-height: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
 
-    /* ============================================
-       CONSTELLATION SVG
-    ============================================ */
-    .constellation-line {
-      stroke-dasharray: 200;
-      stroke-dashoffset: 200;
-      animation: constellationDraw 3s ease forwards 1s;
-    }
-    @keyframes constellationDraw { to { stroke-dashoffset: 0; } }
-    .const-star {
-      animation: constStarPulse 2s ease-in-out infinite;
-    }
-    @keyframes constStarPulse {
-      0%,100% { opacity: 0.6; r: 2; }
-      50% { opacity: 1; r: 3; }
-    }
+/* Petal particles */
+.petal {
+  position: absolute;
+  width: 10px; height: 14px;
+  border-radius: 50% 50% 50% 0;
+  background: radial-gradient(ellipse at 40% 40%, #CC3344, #7A1020);
+  pointer-events: none;
+  will-change: transform, opacity;
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(200,50,60,0.4);
+}
 
-    /* ============================================
-       COUPLE CLOSING WAVE
-    ============================================ */
-    .arm-wave {
-      transform-origin: 70% 80%;
-      animation: waveHand 1.5s ease-in-out infinite;
-    }
-    @keyframes waveHand {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(15deg); }
-    }
-    .couple-float {
-      animation: coupleFloatAnim 4s ease-in-out infinite;
-    }
-    @keyframes coupleFloatAnim {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+/* ═══════════════════════════════════════════════════════
+   SECTION 4 — DETAIL ACARA & COUNTDOWN
+═══════════════════════════════════════════════════════ */
+#section-acara {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* Helper: Hidden before animated in */
-    .fade-ready { opacity: 0; }
+/* Vintage wooden easel cards */
+.event-card {
+  position: relative;
+  background:
+    linear-gradient(175deg, #7A5020 0%, #5C3810 20%, #6B4418 50%, #7A5020 80%, #5C3810 100%);
+  border: 2px solid var(--gold-deep);
+  padding: 32px 28px;
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,0.1),
+    0 15px 50px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(212,175,55,0.15);
+  overflow: hidden;
+}
+.event-card::before {
+  content: '';
+  position: absolute; inset: 6px;
+  border: 1px solid rgba(212,175,55,0.2);
+  pointer-events: none;
+}
+/* Wood grain on cards */
+.event-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    88deg,
+    transparent 0, transparent 15px,
+    rgba(255,255,255,0.015) 15px, rgba(255,255,255,0.015) 16px
+  );
+  pointer-events: none;
+}
 
-    /* ============================================
-       SECTION DIVIDERS
-    ============================================ */
-    .gold-divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
-    .diamond-divider {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-      margin: 1rem 0;
-    }
-    .diamond-divider::before,
-    .diamond-divider::after {
-      content: '';
-      flex: 1;
-      max-width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-dim));
-    }
-    .diamond-divider::after {
-      background: linear-gradient(90deg, var(--gold-dim), transparent);
-    }
+/* Pocket watch decoration */
+.pocket-watch {
+  width: 70px; height: 70px;
+  margin: 0 auto 16px;
+  position: relative;
+}
 
-    /* ============================================
-       RESPONSIVE UTILITIES
-    ============================================ */
-    @media (min-width: 640px) {
-      .couple-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
-    }
-  </style>
+/* Countdown board */
+.countdown-board {
+  background:
+    linear-gradient(175deg, #6B4820 0%, #4A2E0A 30%, #5C3B14 70%, #4A2E0A 100%);
+  border: 2px solid var(--gold-deep);
+  padding: 28px 20px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.15);
+  overflow: hidden;
+}
+.countdown-board::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(212,175,55,0.25); pointer-events: none; }
+.countdown-board::after  { content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 20px, rgba(255,255,255,0.01) 20px, rgba(255,255,255,0.01) 21px);
+  pointer-events: none;
+}
+
+.cd-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  color: var(--gold);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.4);
+  line-height: 1;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+.cd-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+.cd-sep {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: var(--gold-deep);
+  opacity: 0.6;
+  padding: 0 4px;
+  align-self: flex-start;
+  padding-top: 6px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:0.6} 50%{opacity:0.2} }
+
+/* Shimmer on countdown board */
+.countdown-board .shimmer-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(212,175,55,0.08) 50%, transparent 80%);
+  background-size: 200% 100%;
+  animation: cdShimmer 4s ease infinite;
+  pointer-events: none;
+}
+@keyframes cdShimmer {
+  0%,30%  { background-position: -100% 0; }
+  70%,100%{ background-position: 200% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION 5 — PETA LOKASI (EASEL MAP)
+═══════════════════════════════════════════════════════ */
+#section-peta {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.easel-wrap {
+  position: relative;
+  padding: 0 20px;
+}
+
+/* Easel legs */
+.easel-legs {
+  position: absolute;
+  bottom: -40px; left: 50%; transform: translateX(-50%);
+  width: 120%; max-width: 600px;
+  pointer-events: none;
+}
+
+/* Map frame */
+.map-frame {
+  position: relative;
+  border: 8px solid var(--gold-deep);
+  box-shadow:
+    0 0 0 2px var(--gold),
+    0 0 0 4px var(--gold-deep),
+    0 0 0 14px rgba(74,14,23,0.7),
+    0 20px 60px rgba(0,0,0,0.6);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.map-frame::before {
+  content: '';
+  position: absolute; inset: 4px;
+  border: 1px solid rgba(212,175,55,0.4);
+  z-index: 2; pointer-events: none;
+}
+
+/* Wax seal button */
+.wax-seal-btn {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  position: relative;
+  background: radial-gradient(ellipse at 40% 35%, #8B2035, #4A0E17 60%);
+  border: 2px solid var(--gold-deep);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+  box-shadow: 0 6px 25px rgba(74,14,23,0.6), 0 0 0 1px rgba(212,175,55,0.1), inset 0 1px 0 rgba(212,175,55,0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.wax-seal-btn::before {
+  content: '';
+  position: absolute;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #9B3045, #4A0E17);
+  border: 2px solid var(--gold-deep);
+  left: -14px; top: 50%; transform: translateY(-50%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+}
+.wax-seal-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 35px rgba(74,14,23,0.7), 0 0 20px rgba(212,175,55,0.25);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION 6 — KISAH CINTA (TIMELINE)
+═══════════════════════════════════════════════════════ */
+#section-kisah {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold brush stroke timeline line */
+.timeline-line {
+  position: absolute;
+  left: 50%; top: 60px; bottom: 60px;
+  width: 4px;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(180deg,
+      transparent 0%,
+      var(--gold-deep) 5%,
+      var(--gold) 20%,
+      var(--gold-deep) 50%,
+      var(--gold) 80%,
+      var(--gold-deep) 95%,
+      transparent 100%
+    );
+  box-shadow: 0 0 12px rgba(212,175,55,0.35);
+  /* Brushstroke texture */
+  clip-path: polygon(
+    20% 0%, 80% 0.5%, 85% 3%, 78% 6%, 82% 10%,
+    78% 14%, 83% 20%, 77% 26%, 82% 32%, 78% 38%,
+    83% 44%, 77% 50%, 82% 56%, 78% 62%, 83% 68%,
+    77% 74%, 82% 80%, 78% 86%, 83% 92%, 78% 96%,
+    80% 100%, 20% 100%, 22% 96%, 17% 92%, 22% 86%,
+    17% 80%, 22% 74%, 17% 68%, 22% 62%, 17% 56%,
+    22% 50%, 17% 44%, 22% 38%, 17% 32%, 22% 26%,
+    17% 20%, 22% 14%, 17% 10%, 22% 6%, 16% 3%, 20% 0.5%
+  );
+}
+
+/* Timeline node icons */
+.tl-node {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  border: 2px solid var(--gold-deep);
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.15), 0 0 20px rgba(212,175,55,0.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+}
+
+.timeline-item { position: relative; }
+.tl-content {
+  padding: 20px 24px;
+  background: rgba(26,10,13,0.5);
+  border: 1px solid rgba(212,175,55,0.2);
+  backdrop-filter: blur(4px);
+}
+.tl-content::before {
+  content: '';
+  position: absolute; inset: 4px;
+  border: 1px solid rgba(212,175,55,0.08);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION 7 — RSVP & BUKU TAMU
+═══════════════════════════════════════════════════════ */
+#section-rsvp {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Parchment input */
+.parchment-input {
+  width: 100%;
+  background:
+    linear-gradient(175deg, #F0E6CC, #E8D4A8 30%, #F0E0B4 70%, #E8D4A8 100%);
+  border: 1px solid var(--gold-deep);
+  border-radius: 2px;
+  padding: 12px 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.15), 0 1px 0 rgba(212,175,55,0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+}
+.parchment-input:focus {
+  border-color: var(--gold);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.15), 0 0 0 3px rgba(212,175,55,0.15), 0 1px 0 rgba(212,175,55,0.3);
+}
+.parchment-input option { background: var(--ivory); color: var(--ink); }
+.parchment-input::placeholder { color: rgba(26,10,13,0.4); font-style: italic; }
+
+/* Submit button brush stroke animation */
+.submit-btn {
+  position: relative;
+  background: var(--burgundy);
+  border: 1.5px solid var(--gold-deep);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 25px rgba(74,14,23,0.4);
+}
+.submit-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(212,175,55,0.25) 50%, transparent 70%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  transition: background-position 0.5s ease;
+}
+.submit-btn.sending::before { background-position: 200% 0; }
+.submit-btn:hover { background: var(--burgundy-mid); transform: translateY(-1px); }
+
+/* Mini canvas guestbook cards */
+.wish-canvas {
+  position: relative;
+  background:
+    linear-gradient(170deg, #F4EFEA 0%, #EDE4D8 40%, #F0E8D8 70%, #EDE4D8 100%);
+  border: 2px solid var(--gold-deep);
+  padding: 20px 20px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+  overflow: hidden;
+  animation: canvasSlideIn 0.5s ease forwards;
+}
+@keyframes canvasSlideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.wish-canvas::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(212,175,55,0.3); pointer-events: none; }
+/* Canvas texture on wish cards */
+.wish-canvas::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+/* Nail hole at top of canvas card */
+.wish-canvas .nail {
+  position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #999, #444);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION 8 — KADO / TREASURY
+═══════════════════════════════════════════════════════ */
+#section-kado {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Velvet pouch card */
+.velvet-card {
+  position: relative;
+  background:
+    linear-gradient(150deg, #5A1020 0%, #3A0810 30%, #4A1218 60%, #3A0810 100%);
+  border: 1.5px solid var(--gold-deep);
+  padding: 28px 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.1);
+  overflow: hidden;
+}
+.velvet-card::before {
+  content: '';
+  position: absolute; inset: 5px;
+  border: 1px solid rgba(212,175,55,0.15);
+  pointer-events: none;
+}
+/* Velvet fabric texture */
+.velvet-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0, transparent 2px,
+      rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0, transparent 2px,
+      rgba(255,255,255,0.008) 2px, rgba(255,255,255,0.008) 4px
+    );
+  pointer-events: none;
+}
+
+/* Gold braid top ornament */
+.velvet-card .braid {
+  height: 8px;
+  background: linear-gradient(90deg,
+    transparent 0%, var(--gold-deep) 10%, var(--gold) 20%, var(--gold-deep) 30%,
+    var(--gold) 40%, var(--gold-deep) 50%, var(--gold) 60%, var(--gold-deep) 70%,
+    var(--gold) 80%, var(--gold-deep) 90%, transparent 100%
+  );
+  margin: -28px -24px 20px;
+  opacity: 0.8;
+}
+
+/* Copy button */
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-deep);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.copy-btn:hover { background: rgba(212,175,55,0.1); color: var(--gold); border-color: var(--gold); }
+.copy-btn.copied { background: var(--gold-deep); color: var(--ivory); border-color: var(--gold-deep); }
+
+/* QR mini frame */
+.qr-mini-frame {
+  border: 2px solid var(--gold-deep);
+  padding: 6px;
+  background: var(--ivory);
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 0 1px rgba(212,175,55,0.1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION 9 — PENUTUP (FINALE)
+═══════════════════════════════════════════════════════ */
+#section-penutup {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(175deg, var(--ivory) 0%, var(--ivory-deep) 40%, var(--burgundy) 100%);
+}
+
+/* Parallax flower layers */
+.parallax-flowers {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.pf-layer-1 { z-index: 1; }
+.pf-layer-2 { z-index: 2; }
+
+/* Final couple portrait */
+.finale-portrait {
+  position: relative;
+  z-index: 3;
+  width: min(300px, 80vw);
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION TITLES
+═══════════════════════════════════════════════════════ */
+.section-eyebrow {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.section-rule {
+  display: flex; align-items: center; gap: 12px;
+  margin: 12px auto 40px;
+  max-width: 300px;
+}
+.section-rule::before, .section-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-deep));
+}
+.section-rule::after { background: linear-gradient(270deg, transparent, var(--gold-deep)); }
+.section-rule-diamond {
+  width: 8px; height: 8px;
+  background: var(--gold-deep);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL ANIMATION UTILITIES
+═══════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left { transform: translateX(-40px) translateY(0); }
+.reveal-left.visible { transform: translateX(0); }
+.reveal-right { transform: translateX(40px) translateY(0); }
+.reveal-right.visible { transform: translateX(0); }
+
+/* ═══════════════════════════════════════════════════════
+   GLOBAL SECTION PADDING
+═══════════════════════════════════════════════════════ */
+.px-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+/* ═══════════════════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════════════════ */
+.text-gold  { color: var(--gold); }
+.text-gold2 { color: var(--gold-deep); }
+.text-ivory { color: var(--ivory); }
+.text-ivory2{ color: var(--ivory-dark); }
+.text-center{ text-align: center; }
+.w-full     { width: 100%; }
+.hidden     { display: none; }
+.block      { display: block; }
+.flex       { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-3      { gap: 0.75rem; }
+.gap-4      { gap: 1rem; }
+.gap-6      { gap: 1.5rem; }
+.mt-2       { margin-top: 0.5rem; }
+.mt-3       { margin-top: 0.75rem; }
+.mt-4       { margin-top: 1rem; }
+.mt-6       { margin-top: 1.5rem; }
+.mt-8       { margin-top: 2rem; }
+.mt-10      { margin-top: 2.5rem; }
+.mb-2       { margin-bottom: 0.5rem; }
+.mb-3       { margin-bottom: 0.75rem; }
+.mb-4       { margin-bottom: 1rem; }
+.mb-6       { margin-bottom: 1.5rem; }
+.mb-8       { margin-bottom: 2rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.relative   { position: relative; }
+.overflow-hidden { overflow: hidden; }
+.pointer-events-none { pointer-events: none; }
+.z-10       { z-index: 10; }
+.grid-2     { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media(max-width:580px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
 </head>
 
 <body>
+<!-- BRUSH WIPE TRANSITION -->
+<div id="brush-wipe" aria-hidden="true">
+  <div class="stroke"></div>
+  <div class="stroke"></div>
+  <div class="stroke"></div>
+  <div class="stroke"></div>
+  <div class="stroke"></div>
+</div>
 
-<!-- ================================================================
-     STARS CANVAS (Global Background)
-================================================================ -->
-<canvas id="stars-canvas"></canvas>
-
-<!-- ================================================================
-     MUSIC PLAYER
-================================================================ -->
-<audio id="bg-music" loop preload="none"></audio>
-<button id="music-toggle" aria-label="Toggle Music" title="Musik">
-  <svg id="music-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<!-- MUSIC PLAYER -->
+<audio id="bg-audio" loop preload="none"></audio>
+<button id="music-toggle" aria-label="Toggle music">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round">
     <path d="M9 18V5l12-2v13"/>
     <circle cx="6" cy="18" r="3"/>
     <circle cx="18" cy="16" r="3"/>
   </svg>
 </button>
 
-<!-- ================================================================
-     COVER OVERLAY (Shown on load, slides up on button click)
-================================================================ -->
-<div id="cover-overlay">
-  <!-- Cover overlay is transparent; main cover section below is always visible but this overlay sits on top until dismissed -->
-</div>
+<!-- ═══════════════════════════════════════
+     SECTION 1 — COVER
+═══════════════════════════════════════ -->
+<section id="section-cover" class="canvas-bg">
+  <div class="atelier-wrap px-section" style="position:relative;z-index:1;padding-top:3rem;padding-bottom:3rem;">
 
-<!-- ================================================================
-     SECTION 1 — HALAMAN SAMPUL / COVER
-================================================================ -->
-<section id="section-cover" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-  style="background: radial-gradient(ellipse at 50% 30%, #0f2040 0%, #0B1325 50%, #060e1a 100%);">
+    <!-- Top ornamental line -->
+    <div style="text-align:center;margin-bottom:1.2rem;">
+      <span class="section-eyebrow">The Gilded Atelier Presents</span>
+      <svg width="240" height="16" viewBox="0 0 240 16" fill="none" style="display:block;margin:6px auto 0;">
+        <path d="M0 8 Q60 2 120 8 Q180 14 240 8" stroke="#AA7C11" stroke-width="1" opacity="0.6"/>
+        <circle cx="120" cy="8" r="3" fill="#D4AF37" opacity="0.8"/>
+        <circle cx="80" cy="6" r="1.5" fill="#AA7C11" opacity="0.5"/>
+        <circle cx="160" cy="10" r="1.5" fill="#AA7C11" opacity="0.5"/>
+      </svg>
+    </div>
 
-  <!-- Mist -->
-  <div class="mist-layer"></div>
+    <p class="cover-label text-center mb-3">The Wedding of</p>
+    <h1 class="cover-names text-center" style="margin-bottom:0.3rem;" id="cover-names-el">Sixtin &amp; Sofyan</h1>
 
-  <!-- Decorative SVG Gold Border -->
-  <svg class="absolute inset-4 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" style="width:calc(100% - 2rem); height:calc(100% - 2rem);">
-    <rect x="1" y="1" width="98" height="98" rx="0.5" ry="0.5"
-      fill="none" stroke="#D4AF37" stroke-width="0.3" opacity="0.6"
-      class="border-draw"/>
-    <!-- Corner ornaments -->
-    <g stroke="#D4AF37" stroke-width="0.3" fill="none" opacity="0.5">
-      <path d="M1 8 L1 1 L8 1" class="border-draw" style="animation-delay:2s"/>
-      <path d="M92 1 L99 1 L99 8" class="border-draw" style="animation-delay:2.2s"/>
-      <path d="M99 92 L99 99 L92 99" class="border-draw" style="animation-delay:2.4s"/>
-      <path d="M8 99 L1 99 L1 92" class="border-draw" style="animation-delay:2.6s"/>
+    <!-- Baroque framed portrait -->
+    <div class="baroque-frame-outer" style="margin-top:1.5rem;">
+      <!-- Baroque ornamental frame SVG -->
+      <svg class="baroque-frame-svg" viewBox="0 0 400 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Main border -->
+        <rect x="12" y="12" width="376" height="516" rx="2" stroke="#AA7C11" stroke-width="2.5" opacity="0.9"/>
+        <rect x="18" y="18" width="364" height="504" rx="1" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+        <rect x="24" y="24" width="352" height="492" rx="1" stroke="#AA7C11" stroke-width="0.8" opacity="0.35"/>
+        <!-- Top center ornament -->
+        <g transform="translate(200,12)" fill="#D4AF37" opacity="0.95">
+          <path d="M0-18 L8 0 L0 6 L-8 0 Z"/>
+          <path d="M-20-8 Q-8-16 0-10 Q8-16 20-8 L18 0 Q8-8 0-4 Q-8-8 -18 0 Z" opacity="0.7"/>
+          <circle cx="0" cy="-22" r="3"/>
+          <circle cx="-14" cy="-14" r="2"/>
+          <circle cx="14" cy="-14" r="2"/>
+        </g>
+        <!-- Bottom center ornament -->
+        <g transform="translate(200,528)" fill="#D4AF37" opacity="0.95">
+          <path d="M0 18 L8 0 L0-6 L-8 0 Z"/>
+          <path d="M-20 8 Q-8 16 0 10 Q8 16 20 8 L18 0 Q8 8 0 4 Q-8 8 -18 0 Z" opacity="0.7"/>
+          <circle cx="0" cy="22" r="3"/>
+        </g>
+        <!-- Top-left baroque flourish -->
+        <g transform="translate(12,12)" stroke="#D4AF37" stroke-width="1.2" opacity="0.8" fill="none">
+          <path d="M0 0 Q30 0 35 30 Q38 55 20 60 Q8 62 4 50 Q0 38 12 35 Q22 32 22 44 Q22 52 14 50"/>
+          <path d="M0 0 Q0 30 30 35 Q55 38 60 20 Q62 8 50 4 Q38 0 35 12 Q32 22 44 22 Q52 22 50 14"/>
+          <circle cx="22" cy="44" r="3" fill="#D4AF37"/>
+          <circle cx="44" cy="22" r="3" fill="#D4AF37"/>
+        </g>
+        <!-- Top-right baroque flourish -->
+        <g transform="translate(388,12) scale(-1,1)" stroke="#D4AF37" stroke-width="1.2" opacity="0.8" fill="none">
+          <path d="M0 0 Q30 0 35 30 Q38 55 20 60 Q8 62 4 50 Q0 38 12 35 Q22 32 22 44 Q22 52 14 50"/>
+          <path d="M0 0 Q0 30 30 35 Q55 38 60 20 Q62 8 50 4 Q38 0 35 12 Q32 22 44 22 Q52 22 50 14"/>
+          <circle cx="22" cy="44" r="3" fill="#D4AF37"/>
+          <circle cx="44" cy="22" r="3" fill="#D4AF37"/>
+        </g>
+        <!-- Bottom-left baroque flourish -->
+        <g transform="translate(12,528) scale(1,-1)" stroke="#D4AF37" stroke-width="1.2" opacity="0.8" fill="none">
+          <path d="M0 0 Q30 0 35 30 Q38 55 20 60 Q8 62 4 50 Q0 38 12 35 Q22 32 22 44 Q22 52 14 50"/>
+          <path d="M0 0 Q0 30 30 35 Q55 38 60 20 Q62 8 50 4 Q38 0 35 12 Q32 22 44 22 Q52 22 50 14"/>
+        </g>
+        <!-- Bottom-right baroque flourish -->
+        <g transform="translate(388,528) scale(-1,-1)" stroke="#D4AF37" stroke-width="1.2" opacity="0.8" fill="none">
+          <path d="M0 0 Q30 0 35 30 Q38 55 20 60 Q8 62 4 50 Q0 38 12 35 Q22 32 22 44 Q22 52 14 50"/>
+          <path d="M0 0 Q0 30 30 35 Q55 38 60 20 Q62 8 50 4 Q38 0 35 12 Q32 22 44 22 Q52 22 50 14"/>
+        </g>
+        <!-- Side ornaments midpoints -->
+        <g fill="#D4AF37" opacity="0.7">
+          <path d="M12 270 L6 262 L0 270 L6 278 Z"/>
+          <path d="M388 270 L394 262 L400 270 L394 278 Z"/>
+        </g>
+      </svg>
+
+      <!-- Portrait canvas -->
+      <div class="portrait-canvas">
+        <div class="oil-portrait">
+          <!-- SVG Oil Painting Portrait — Sixtin & Sofyan -->
+          <svg class="couple-svg" viewBox="0 0 340 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="chiaro" cx="55%" cy="28%" r="45%">
+                <stop offset="0%" stop-color="#FFDC8C" stop-opacity="0.55"/>
+                <stop offset="40%" stop-color="#FFB840" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+              <radialGradient id="skinBride" cx="50%" cy="40%" r="50%">
+                <stop offset="0%" stop-color="#E8A87C"/>
+                <stop offset="60%" stop-color="#C87850"/>
+                <stop offset="100%" stop-color="#8B4020"/>
+              </radialGradient>
+              <radialGradient id="skinGroom" cx="50%" cy="40%" r="50%">
+                <stop offset="0%" stop-color="#D4895A"/>
+                <stop offset="60%" stop-color="#A86030"/>
+                <stop offset="100%" stop-color="#6B3A18"/>
+              </radialGradient>
+              <linearGradient id="dressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E8D8C0"/>
+                <stop offset="30%" stop-color="#C8B898"/>
+                <stop offset="70%" stop-color="#D8C8A8"/>
+                <stop offset="100%" stop-color="#B89870"/>
+              </linearGradient>
+              <linearGradient id="suitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2A1A0E"/>
+                <stop offset="50%" stop-color="#1A0E06"/>
+                <stop offset="100%" stop-color="#2A1A0E"/>
+              </linearGradient>
+              <filter id="painterly">
+                <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="3" seed="3" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+
+            <!-- Background atmosphere -->
+            <rect width="340" height="450" fill="#1A0805"/>
+            <ellipse cx="170" cy="150" rx="200" ry="160" fill="#2A1208" opacity="0.8"/>
+
+            <!-- Chiaroscuro light -->
+            <ellipse cx="188" cy="120" rx="140" ry="130" fill="url(#chiaro)"/>
+
+            <!-- Groom body (right) -->
+            <g filter="url(#painterly)">
+              <!-- Suit jacket -->
+              <path d="M190 280 Q195 250 200 230 Q205 215 200 200 L195 195 Q185 210 180 230 Q175 250 175 280 L250 280 Q250 260 245 240 Q240 220 235 210 L230 200 Q225 195 220 200 Q215 210 210 230 Q205 250 200 280 Z" fill="url(#suitGrad)"/>
+              <!-- Suit lapels -->
+              <path d="M195 200 Q205 210 208 225 L200 220 Q200 205 195 200 Z" fill="#3A2010" opacity="0.8"/>
+              <path d="M225 200 Q218 210 215 225 L220 220 Q222 205 225 200 Z" fill="#3A2010" opacity="0.8"/>
+              <!-- White shirt -->
+              <path d="M205 200 Q210 215 210 230 L208 225 Q207 210 205 200 Z" fill="#DDD0B0" opacity="0.9"/>
+              <!-- Groom head -->
+              <ellipse cx="212" cy="165" rx="30" ry="36" fill="url(#skinGroom)"/>
+              <!-- Hair -->
+              <path d="M182 155 Q186 135 212 130 Q238 135 242 155 Q242 148 235 140 Q224 132 212 131 Q200 132 189 140 Q183 148 182 155 Z" fill="#1A0A04"/>
+              <!-- Face features -->
+              <ellipse cx="203" cy="163" rx="5" ry="3.5" fill="#0A0402" opacity="0.7"/>
+              <ellipse cx="221" cy="163" rx="5" ry="3.5" fill="#0A0402" opacity="0.7"/>
+              <path d="M206 175 Q212 179 218 175" fill="none" stroke="#8B4020" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M200 156 Q203 153 206 155" fill="none" stroke="#3A1A08" stroke-width="1.2"/>
+              <path d="M218 155 Q221 153 224 156" fill="none" stroke="#3A1A08" stroke-width="1.2"/>
+              <!-- Groom neck / collar -->
+              <rect x="206" y="196" width="12" height="10" fill="url(#skinGroom)" opacity="0.9"/>
+              <rect x="204" y="198" width="3" height="6" fill="#CCBF90" opacity="0.9"/>
+              <rect x="215" y="198" width="3" height="6" fill="#CCBF90" opacity="0.9"/>
+              <!-- Bow tie -->
+              <path d="M204 203 L208 200 L210 203 L208 206 Z" fill="#5A1A08"/>
+              <path d="M216 203 L212 200 L210 203 L212 206 Z" fill="#5A1A08"/>
+              <circle cx="210" cy="203" r="2" fill="#3A0E06"/>
+            </g>
+
+            <!-- Bride body (left/center) -->
+            <g filter="url(#painterly)">
+              <!-- Wedding dress -->
+              <path d="M60 450 Q70 360 90 310 Q100 285 108 265 L108 235 Q125 440 140 450 Z" fill="url(#dressGrad)" opacity="0.9"/>
+              <path d="M108 265 Q115 280 125 290 Q135 295 140 310 Q155 360 160 450 L60 450 Z" fill="url(#dressGrad)" opacity="0.95"/>
+              <!-- Dress bodice -->
+              <path d="M90 200 Q95 220 100 240 Q106 260 108 265 Q110 260 115 245 Q120 225 125 205 Q118 195 108 193 Q98 195 90 200 Z" fill="#E8D8C0"/>
+              <!-- Dress volume layers -->
+              <path d="M75 350 Q95 340 115 350 Q135 355 155 350" fill="none" stroke="#C8B890" stroke-width="1.5" opacity="0.6"/>
+              <path d="M68 390 Q90 378 115 388 Q140 395 158 388" fill="none" stroke="#B8A880" stroke-width="1.5" opacity="0.5"/>
+              <!-- Bride head -->
+              <ellipse cx="108" cy="155" rx="32" ry="38" fill="url(#skinBride)"/>
+              <!-- Veil -->
+              <path d="M76 150 Q80 125 108 118 Q136 125 140 150 Q130 130 108 128 Q86 130 76 150 Z" fill="rgba(240,230,210,0.6)"/>
+              <path d="M76 150 Q60 190 55 250 Q50 300 55 350" fill="none" stroke="rgba(240,230,210,0.35)" stroke-width="12" stroke-linecap="round"/>
+              <!-- Hair -->
+              <path d="M76 152 Q80 130 108 122 Q136 130 140 152 Q136 138 124 132 Q116 128 108 128 Q100 128 92 132 Q80 138 76 152 Z" fill="#5A2810"/>
+              <!-- Hair detail -->
+              <path d="M100 125 Q108 120 115 125" fill="none" stroke="#3A1808" stroke-width="2"/>
+              <!-- Face features -->
+              <ellipse cx="98" cy="152" rx="5.5" ry="3.5" fill="#0A0402" opacity="0.75"/>
+              <ellipse cx="118" cy="152" rx="5.5" ry="3.5" fill="#0A0402" opacity="0.75"/>
+              <!-- Eyelashes -->
+              <path d="M93 149 Q94 147 95 149" stroke="#1A0806" stroke-width="1" fill="none"/>
+              <path d="M113 149 Q114 147 115 149" stroke="#1A0806" stroke-width="1" fill="none"/>
+              <!-- Lips -->
+              <path d="M100 168 Q108 173 116 168 Q112 175 108 176 Q104 175 100 168 Z" fill="#8B2020" opacity="0.85"/>
+              <path d="M100 168 Q108 165 116 168" fill="none" stroke="#6B1818" stroke-width="1"/>
+              <!-- Cheeks blush -->
+              <ellipse cx="90" cy="165" rx="10" ry="6" fill="#E87890" opacity="0.18"/>
+              <ellipse cx="126" cy="165" rx="10" ry="6" fill="#E87890" opacity="0.18"/>
+              <!-- Hair highlights -->
+              <path d="M88 140 Q100 130 112 133" fill="none" stroke="#8B5030" stroke-width="2" opacity="0.4"/>
+              <!-- Earring -->
+              <ellipse cx="76" cy="166" rx="3" ry="5" fill="#D4AF37" opacity="0.9"/>
+              <!-- Neck -->
+              <rect x="100" y="190" width="16" height="14" fill="url(#skinBride)" opacity="0.9"/>
+              <!-- Bouquet -->
+              <g transform="translate(135, 260)">
+                <circle cx="0" cy="0" r="18" fill="#8B2030" opacity="0.7"/>
+                <circle cx="-10" cy="-8" r="14" fill="#AA3040" opacity="0.75"/>
+                <circle cx="10" cy="-8" r="13" fill="#CC3850" opacity="0.65"/>
+                <circle cx="0" cy="-16" r="12" fill="#9B2838" opacity="0.7"/>
+                <circle cx="-6" cy="6" r="10" fill="#BB3045" opacity="0.6"/>
+                <circle cx="8" cy="4" r="11" fill="#AA2838" opacity="0.65"/>
+                <!-- Stems -->
+                <path d="M-8 16 Q0 35 8 30" fill="none" stroke="#2A5818" stroke-width="2"/>
+                <path d="M0 18 Q2 40 10 38" fill="none" stroke="#2A5818" stroke-width="1.5"/>
+                <!-- Petals detail -->
+                <circle cx="-2" cy="-3" r="5" fill="#E84060" opacity="0.4"/>
+                <circle cx="4" cy="-12" r="4" fill="#E84060" opacity="0.3"/>
+              </g>
+            </g>
+
+            <!-- Hands touching in middle -->
+            <g filter="url(#painterly)" opacity="0.85">
+              <path d="M155 285 Q162 280 168 282 Q172 284 170 290 Q168 296 162 294 Q156 292 155 285 Z" fill="url(#skinBride)"/>
+              <path d="M175 282 Q180 278 186 280 Q192 282 190 288 Q188 294 182 292 Q175 290 175 282 Z" fill="url(#skinGroom)"/>
+            </g>
+
+            <!-- Chiaroscuro overlay -->
+            <rect width="340" height="450" fill="url(#chiaro)" style="mix-blend-mode:screen;pointer-events:none;"/>
+            <!-- Dark vignette -->
+            <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+              <stop offset="40%" stop-color="transparent"/>
+              <stop offset="100%" stop-color="#0A0402" stop-opacity="0.7"/>
+            </radialGradient>
+            <rect width="340" height="450" fill="url(#vig)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wood plaque — guest name -->
+    <div class="wood-plaque" id="guest-plaque">
+      <p style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(212,175,55,0.65);margin-bottom:4px;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p id="guest-name-display" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:#F0D060;text-shadow:0 1px 4px rgba(0,0,0,0.5);">Sahabat &amp; Kerabat</p>
+    </div>
+
+    <!-- Open button -->
+    <div style="text-align:center;margin-top:2rem;">
+      <button class="open-btn" id="open-btn">
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+
+    <!-- Bottom ornamental line -->
+    <div style="text-align:center;margin-top:1.5rem;">
+      <svg width="200" height="12" viewBox="0 0 200 12" fill="none" style="display:block;margin:0 auto;">
+        <path d="M0 6 L200 6" stroke="#AA7C11" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="100" cy="6" r="2.5" fill="#D4AF37" opacity="0.7"/>
+        <circle cx="70" cy="6" r="1.5" fill="#AA7C11" opacity="0.5"/>
+        <circle cx="130" cy="6" r="1.5" fill="#AA7C11" opacity="0.5"/>
+      </svg>
+      <p style="font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.4em;color:rgba(170,124,17,0.6);margin-top:6px;text-transform:uppercase;">Minggu, 7 Juni 2026</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — OVERTURE / PEMBUKA
+═══════════════════════════════════════ -->
+<section id="section-pembuka" class="burgundy-bg" style="padding:80px 0;position:relative;overflow:hidden;">
+
+  <!-- Floral corner ornaments (SVG oil-painting style) -->
+  <svg class="floral-corner tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g opacity="0.85">
+      <!-- Roses and leaves — impasto style -->
+      <ellipse cx="40" cy="80" rx="28" ry="22" fill="#6B1525" opacity="0.8"/>
+      <ellipse cx="30" cy="68" rx="22" ry="18" fill="#8B2035" opacity="0.75"/>
+      <ellipse cx="52" cy="72" rx="20" ry="16" fill="#7A1C2C" opacity="0.7"/>
+      <ellipse cx="42" cy="60" rx="18" ry="14" fill="#9B2840" opacity="0.65"/>
+      <!-- Petals -->
+      <path d="M25 65 Q35 50 45 65 Q38 58 35 55 Q32 58 25 65 Z" fill="#BB3850" opacity="0.7"/>
+      <path d="M48 62 Q58 48 65 62 Q58 56 56 53 Q52 56 48 62 Z" fill="#AA3045" opacity="0.65"/>
+      <!-- Dark leaves -->
+      <path d="M10 100 Q30 80 50 95 Q35 88 25 90 Q18 95 10 100 Z" fill="#097969" opacity="0.8"/>
+      <path d="M5 140 Q20 110 45 125 Q28 118 18 122 Q10 130 5 140 Z" fill="#065A4D" opacity="0.75"/>
+      <path d="M0 80 Q15 55 38 68 Q22 62 12 66 Q5 72 0 80 Z" fill="#097969" opacity="0.7"/>
+      <!-- Stems -->
+      <path d="M10 180 Q35 150 55 120 Q65 100 50 80" fill="none" stroke="#065A4D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M0 160 Q25 130 40 105" fill="none" stroke="#097969" stroke-width="2"/>
+      <!-- Small buds -->
+      <circle cx="65" cy="45" r="12" fill="#8B2035" opacity="0.6"/>
+      <circle cx="55" cy="35" r="9" fill="#AA3040" opacity="0.55"/>
+      <!-- Gold accents -->
+      <circle cx="38" cy="56" r="4" fill="#D4AF37" opacity="0.5"/>
+      <circle cx="52" cy="48" r="3" fill="#D4AF37" opacity="0.45"/>
     </g>
-    <!-- Top & bottom center ornaments -->
-    <path d="M45 1 L50 4 L55 1" fill="none" stroke="#D4AF37" stroke-width="0.3" opacity="0.5" class="border-draw" style="animation-delay:3s"/>
-    <path d="M45 99 L50 96 L55 99" fill="none" stroke="#D4AF37" stroke-width="0.3" opacity="0.5" class="border-draw" style="animation-delay:3s"/>
+  </svg>
+  <svg class="floral-corner tr" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g opacity="0.85">
+      <ellipse cx="40" cy="80" rx="28" ry="22" fill="#6B1525" opacity="0.8"/>
+      <ellipse cx="30" cy="68" rx="22" ry="18" fill="#8B2035" opacity="0.75"/>
+      <ellipse cx="52" cy="72" rx="20" ry="16" fill="#7A1C2C" opacity="0.7"/>
+      <ellipse cx="42" cy="60" rx="18" ry="14" fill="#9B2840" opacity="0.65"/>
+      <path d="M25 65 Q35 50 45 65 Q38 58 35 55 Q32 58 25 65 Z" fill="#BB3850" opacity="0.7"/>
+      <path d="M48 62 Q58 48 65 62 Q58 56 56 53 Q52 56 48 62 Z" fill="#AA3045" opacity="0.65"/>
+      <path d="M10 100 Q30 80 50 95 Q35 88 25 90 Q18 95 10 100 Z" fill="#097969" opacity="0.8"/>
+      <path d="M5 140 Q20 110 45 125 Q28 118 18 122 Q10 130 5 140 Z" fill="#065A4D" opacity="0.75"/>
+      <path d="M0 80 Q15 55 38 68 Q22 62 12 66 Q5 72 0 80 Z" fill="#097969" opacity="0.7"/>
+      <path d="M10 180 Q35 150 55 120 Q65 100 50 80" fill="none" stroke="#065A4D" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="65" cy="45" r="12" fill="#8B2035" opacity="0.6"/>
+      <circle cx="38" cy="56" r="4" fill="#D4AF37" opacity="0.5"/>
+    </g>
+  </svg>
+  <svg class="floral-corner bl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g opacity="0.85">
+      <ellipse cx="40" cy="120" rx="28" ry="22" fill="#6B1525" opacity="0.8"/>
+      <ellipse cx="30" cy="132" rx="22" ry="18" fill="#8B2035" opacity="0.75"/>
+      <ellipse cx="52" cy="128" rx="20" ry="16" fill="#7A1C2C" opacity="0.7"/>
+      <path d="M10 100 Q30 120 50 105 Q35 112 25 110 Q18 105 10 100 Z" fill="#097969" opacity="0.8"/>
+      <path d="M5 60 Q20 90 45 75 Q28 82 18 78 Q10 70 5 60 Z" fill="#065A4D" opacity="0.75"/>
+      <path d="M10 20 Q35 50 55 80 Q65 100 50 120" fill="none" stroke="#065A4D" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="65" cy="155" r="12" fill="#8B2035" opacity="0.6"/>
+      <circle cx="38" cy="144" r="4" fill="#D4AF37" opacity="0.5"/>
+    </g>
+  </svg>
+  <svg class="floral-corner br" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g opacity="0.85">
+      <ellipse cx="40" cy="120" rx="28" ry="22" fill="#6B1525" opacity="0.8"/>
+      <ellipse cx="30" cy="132" rx="22" ry="18" fill="#8B2035" opacity="0.75"/>
+      <ellipse cx="52" cy="128" rx="20" ry="16" fill="#7A1C2C" opacity="0.7"/>
+      <path d="M10 100 Q30 120 50 105 Q35 112 25 110 Q18 105 10 100 Z" fill="#097969" opacity="0.8"/>
+      <path d="M5 60 Q20 90 45 75 Q28 82 18 78 Q10 70 5 60 Z" fill="#065A4D" opacity="0.75"/>
+      <path d="M10 20 Q35 50 55 80 Q65 100 50 120" fill="none" stroke="#065A4D" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="65" cy="155" r="12" fill="#8B2035" opacity="0.6"/>
+      <circle cx="38" cy="144" r="4" fill="#D4AF37" opacity="0.5"/>
+    </g>
   </svg>
 
-  <!-- Content -->
-  <div class="invitation-container relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 text-center">
-
-    <!-- Bismillah -->
-    <p id="cover-bismillah" class="fade-ready font-body text-gold-dim text-sm tracking-widest mb-4 gold-text" style="font-family: var(--font-text); font-size:0.85rem; letter-spacing: 0.3em; opacity:0;">
-      بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-    </p>
-
-    <!-- The Wedding Of -->
-    <p id="cover-label" class="fade-ready text-ivory-dim tracking-widest uppercase mb-3 fade-ready" style="font-family: var(--font-text); font-size: 0.8rem; letter-spacing: 0.4em; color: var(--ivory-dim); opacity:0;">
-      The Wedding of
-    </p>
-
-    <!-- Names -->
-    <h1 id="cover-names" class="fade-ready gold-text mb-2" style="font-family: var(--font-display); font-size: clamp(2.2rem, 8vw, 3.8rem); line-height: 1.1; opacity:0;">
-      Sixtin &amp; Sofyan
-    </h1>
-
-    <!-- Date -->
-    <p id="cover-date" class="fade-ready mb-6" style="font-family: var(--font-text); font-size: 0.9rem; letter-spacing: 0.25em; color: var(--ivory-dim); opacity:0.7; opacity:0;">
-      Minggu, 7 Juni 2026
-    </p>
-
-    <div class="gold-divider mb-6" id="cover-divider" style="opacity:0;"></div>
-
-    <!-- Guest Name Box -->
-    <div id="guest-box" class="fade-ready mb-8 px-6 py-3 border border-gold border-opacity-30 relative" style="border-color: rgba(212,175,55,0.35); opacity:0;">
-      <p style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--ivory-dim); opacity:0.8; text-transform: uppercase; margin-bottom: 4px;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-      <p id="guest-name-display" style="font-family: var(--font-body); font-style: italic; font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--gold-light);">Sahabat &amp; Kerabat</p>
+  <div class="atelier-wrap px-section" style="position:relative;z-index:1;">
+    <div class="reveal">
+      <span class="section-eyebrow" style="color:rgba(212,175,55,0.7);">Dengan Penuh Kasih &amp; Syukur</span>
+      <h2 class="section-title gold-gradient-text">Pembuka</h2>
+      <div class="section-rule"><div class="section-rule-diamond" style="background:var(--gold-deep);"></div></div>
     </div>
 
-    <!-- Open Button -->
-    <button id="open-btn" class="fade-ready pulse-btn px-10 py-3" style="font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; border-radius: 0; opacity:0;">
-      Buka Undangan
-    </button>
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 2 — PEMBUKA & MUSIK
-================================================================ -->
-<section id="section-pembuka" class="relative py-24 overflow-hidden section-emerald">
-  <div id="fireflies-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
-
-  <div class="invitation-container relative z-10 px-6 text-center">
-
-    <!-- Salam Pembuka -->
-    <div class="mb-10">
-      <p class="pembuka-line fade-ready" style="font-family: var(--font-text); font-size: 1.2rem; letter-spacing: 0.1em; color: var(--gold-light); margin-bottom: 0.5rem; opacity:0;">
-        السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+    <div class="reveal">
+      <div class="salam-arabic">
+        بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:rgba(212,175,55,0.85);text-align:center;margin-top:0.75rem;letter-spacing:0.08em;">
+        Assalamu'alaikum Warahmatullahi Wabarakatuh
       </p>
-      <p class="pembuka-line fade-ready mt-4" style="font-family: var(--font-body); font-size: 1.1rem; color: var(--ivory); line-height: 1.8; opacity:0;">
-        Dengan penuh rasa syukur dan kerendahan hati, kami mengundang<br>
-        Bapak/Ibu/Saudara/i untuk berbagi kebahagiaan bersama kami.
+      <p style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--ivory-dark);text-align:center;margin-top:0.75rem;line-height:1.8;max-width:500px;margin-left:auto;margin-right:auto;">
+        Dengan memohon rahmat dan ridha Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu dalam acara pernikahan kami.
       </p>
     </div>
 
-    <div class="diamond-divider my-8" style="color: var(--gold);">❖</div>
+    <div class="brush-divider" style="margin:2rem 0;"></div>
 
-    <!-- QS. Ar-Rum:21 -->
-    <div class="max-w-md mx-auto">
-      <blockquote class="pembuka-line fade-ready" style="font-family: var(--font-body); font-style: italic; font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--ivory); line-height: 1.9; opacity:0;">
-        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
-      </blockquote>
-      <p class="pembuka-line fade-ready mt-3" style="font-family: var(--font-text); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--gold-dim); opacity:0;">
-        — QS. Ar-Rum : 21 —
-      </p>
-    </div>
-
-    <div class="diamond-divider my-8" style="color: var(--gold);">❖</div>
-
-    <!-- Islamic Poetry -->
-    <div class="max-w-sm mx-auto">
-      <p class="pembuka-line fade-ready" style="font-family: var(--font-body); font-style: italic; font-size: 1rem; color: var(--ivory-dim); line-height: 2; opacity:0;">
-        "Cinta yang tulus adalah saat dua jiwa bertemu dalam ridha-Nya,<br>
-        saling menjaga, saling menguatkan, hingga di surga-Nya berjumpa."
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 3 — PROFIL MEMPELAI
-================================================================ -->
-<section id="section-profil" class="relative py-24 overflow-hidden section-navy">
-  <!-- Subtle background gradient -->
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 50%, rgba(28,49,36,0.15) 0%, transparent 70%);"></div>
-
-  <div class="invitation-container relative z-10 px-6">
-
-    <!-- Section Title -->
-    <div class="text-center mb-16">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">
-        Dua Jiwa, Satu Takdir
-      </p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">
-        Mempelai Kami
-      </h2>
-      <div class="gold-divider mt-4"></div>
-    </div>
-
-    <!-- Couple Profiles -->
-    <div class="couple-grid flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-center">
-
-      <!-- Bride -->
-      <div id="bride-card" class="fade-ready flex-1 text-center" style="opacity:0;">
-        <!-- SVG Bride Silhouette -->
-        <div class="relative mx-auto mb-6" style="width: 140px; height: 200px;">
-          <svg viewBox="0 0 140 200" width="140" height="200" xmlns="http://www.w3.org/2000/svg">
-            <!-- Head -->
-            <circle cx="70" cy="30" r="18" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity="0.9"/>
-            <!-- Hair / Veil -->
-            <path d="M52 25 Q45 15 50 10 Q60 5 70 8 Q80 5 90 10 Q95 15 88 25" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.7"/>
-            <path d="M52 25 Q40 35 38 60 Q36 80 38 90" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
-            <!-- Body -->
-            <path d="M58 48 Q55 60 52 70 L50 90" fill="none" stroke="var(--ivory)" stroke-width="1.5" opacity="0.8"/>
-            <path d="M82 48 Q85 60 88 70 L90 90" fill="none" stroke="var(--ivory)" stroke-width="1.5" opacity="0.8"/>
-            <!-- Torso center -->
-            <path d="M60 48 L70 52 L80 48" fill="none" stroke="var(--ivory)" stroke-width="1.2" opacity="0.7"/>
-            <!-- Wedding dress — animated -->
-            <g class="bride-dress">
-              <path d="M50 90 Q35 120 30 160 Q28 180 70 185 Q112 180 110 160 Q105 120 90 90 Q80 98 70 100 Q60 98 50 90 Z" fill="rgba(212,175,55,0.08)" stroke="var(--gold)" stroke-width="1" opacity="0.85"/>
-              <!-- Dress layers -->
-              <path d="M40 130 Q70 140 100 130" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
-              <path d="M33 155 Q70 168 107 155" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.3"/>
-            </g>
-            <!-- Bouquet -->
-            <circle cx="58" cy="85" r="8" fill="rgba(212,175,55,0.15)" stroke="var(--gold)" stroke-width="0.8" opacity="0.7"/>
-            <circle cx="52" cy="80" r="5" fill="rgba(212,175,55,0.1)" stroke="var(--gold)" stroke-width="0.8" opacity="0.6"/>
-            <circle cx="64" cy="78" r="6" fill="rgba(212,175,55,0.1)" stroke="var(--gold)" stroke-width="0.8" opacity="0.6"/>
-          </svg>
-
-          <!-- Gold dust particles -->
-          <div class="gold-dust-particle" style="--dur:2.5s; --delay:0s; --dx:10px; left:30%; bottom:0;"></div>
-          <div class="gold-dust-particle" style="--dur:3s; --delay:0.7s; --dx:-8px; left:50%; bottom:0;"></div>
-          <div class="gold-dust-particle" style="--dur:2.8s; --delay:1.4s; --dx:5px; left:70%; bottom:0;"></div>
-          <div class="gold-dust-particle" style="--dur:3.2s; --delay:0.3s; --dx:-12px; left:40%; bottom:5px;"></div>
-          <div class="gold-dust-particle" style="--dur:2.2s; --delay:1.8s; --dx:15px; left:60%; bottom:5px;"></div>
-        </div>
-
-        <h3 style="font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.5rem); margin-bottom: 0.5rem;" class="gold-text">Sixtin Kristiana</h3>
-        <p style="font-family: var(--font-text); font-style: italic; font-size: 0.9rem; color: var(--ivory-dim); line-height: 1.7; opacity:0.85;">
-          Putri dari<br>
-          <span style="color: var(--gold-light);">Alm. Bapak Slamet Dalban</span><br>
-          &amp; <span style="color: var(--gold-light);">Ibu Munarti</span>
+    <div class="reveal">
+      <div class="quran-frame">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <p style="font-family:'Lora',serif;font-style:italic;font-size:clamp(0.95rem,2.5vw,1.1rem);color:var(--ivory);line-height:1.9;text-align:center;">
+          "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
         </p>
-        <p style="font-family: var(--font-text); font-size: 0.78rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-top: 0.75rem; opacity:0.8;">
-          Pagilaran, Kec. Blado, Kab. Batang
+        <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-deep);text-align:center;margin-top:1rem;text-transform:uppercase;">— QS. Ar-Rum : 21 —</p>
+        <div style="height:1px;background:linear-gradient(90deg,transparent,var(--gold-deep),transparent);margin:1.2rem 0;opacity:0.5;"></div>
+        <p style="font-family:'Lora',serif;font-style:italic;font-size:0.92rem;color:rgba(240,208,96,0.8);line-height:1.9;text-align:center;">
+          "Cinta sejati bukan sekadar menemukan seseorang yang sempurna,<br/>melainkan belajar mencintai jiwa yang tidak sempurna<br/>dengan cara yang sempurna, selamanya."
         </p>
       </div>
-
-      <!-- Center Constellation Heart -->
-      <div class="flex items-center justify-center py-4 sm:py-0" style="min-width: 80px;">
-        <svg id="constellation-heart" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
-          <!-- Heart path via constellation lines -->
-          <path d="M40 60 Q20 45 20 32 Q20 20 30 20 Q36 20 40 28 Q44 20 50 20 Q60 20 60 32 Q60 45 40 60 Z"
-            fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1" class="constellation-line"/>
-          <!-- Constellation stars -->
-          <circle cx="40" cy="60" r="2.5" fill="var(--gold)" class="const-star"/>
-          <circle cx="20" cy="32" r="2" fill="var(--gold)" class="const-star" style="animation-delay:0.3s"/>
-          <circle cx="60" cy="32" r="2" fill="var(--gold)" class="const-star" style="animation-delay:0.6s"/>
-          <circle cx="40" cy="28" r="2" fill="var(--gold)" class="const-star" style="animation-delay:0.9s"/>
-          <!-- Glow center -->
-          <circle cx="40" cy="40" r="4" fill="rgba(212,175,55,0.15)" class="const-star" style="animation-delay:1.2s"/>
-        </svg>
-      </div>
-
-      <!-- Groom -->
-      <div id="groom-card" class="fade-ready flex-1 text-center" style="opacity:0;">
-        <!-- SVG Groom Silhouette -->
-        <div class="relative mx-auto mb-6" style="width: 140px; height: 200px;">
-          <svg viewBox="0 0 140 200" width="140" height="200" xmlns="http://www.w3.org/2000/svg" class="groom-breathe">
-            <!-- Head -->
-            <circle cx="70" cy="30" r="18" fill="none" stroke="var(--ivory)" stroke-width="1.5" opacity="0.85"/>
-            <!-- Songkok/Peci -->
-            <path d="M52 25 Q52 16 70 15 Q88 16 88 25" fill="rgba(212,175,55,0.12)" stroke="var(--gold)" stroke-width="1.2" opacity="0.9"/>
-            <!-- Suit/Batik body -->
-            <path d="M58 48 L50 90" stroke="var(--ivory)" stroke-width="1.5" fill="none" opacity="0.8"/>
-            <path d="M82 48 L90 90" stroke="var(--ivory)" stroke-width="1.5" fill="none" opacity="0.8"/>
-            <rect x="50" y="48" width="40" height="42" rx="2" fill="rgba(253,251,247,0.07)" stroke="var(--ivory)" stroke-width="1" opacity="0.75"/>
-            <!-- Tie / Batik detail -->
-            <path d="M68 52 L70 70 L72 52" fill="rgba(212,175,55,0.2)" stroke="var(--gold)" stroke-width="0.8"/>
-            <!-- Buttons -->
-            <circle cx="70" cy="58" r="1" fill="var(--gold)" opacity="0.6"/>
-            <circle cx="70" cy="64" r="1" fill="var(--gold)" opacity="0.6"/>
-            <!-- Legs -->
-            <rect x="52" y="90" width="14" height="55" rx="2" fill="rgba(253,251,247,0.07)" stroke="var(--ivory)" stroke-width="1" opacity="0.75"/>
-            <rect x="74" y="90" width="14" height="55" rx="2" fill="rgba(253,251,247,0.07)" stroke="var(--ivory)" stroke-width="1" opacity="0.75"/>
-            <!-- Shoes -->
-            <ellipse cx="59" cy="148" rx="10" ry="4" fill="rgba(212,175,55,0.2)" stroke="var(--gold)" stroke-width="0.8" opacity="0.7"/>
-            <ellipse cx="81" cy="148" rx="10" ry="4" fill="rgba(212,175,55,0.2)" stroke="var(--gold)" stroke-width="0.8" opacity="0.7"/>
-          </svg>
-        </div>
-
-        <h3 style="font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.5rem); margin-bottom: 0.5rem;" class="gold-text">Sofyan Kurniadi</h3>
-        <p style="font-family: var(--font-text); font-style: italic; font-size: 0.9rem; color: var(--ivory-dim); line-height: 1.7; opacity:0.85;">
-          Putra dari<br>
-          <span style="color: var(--gold-light);">Bapak Kurniadi</span><br>
-          &amp; <span style="color: var(--gold-light);">Ibu Sri Wahyuni</span>
-        </p>
-        <p style="font-family: var(--font-text); font-size: 0.78rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-top: 0.75rem; opacity:0.8;">
-          Wonokerto, Kec. Bandar, Kab. Batang
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 4 — DETAIL ACARA & HITUNG MUNDUR
-================================================================ -->
-<section id="section-acara" class="relative py-24 overflow-hidden section-navy">
-  <!-- Astrolabe BG -->
-  <div class="absolute inset-0 flex items-center justify-center pointer-events-none" style="opacity:0.06;">
-    <svg viewBox="0 0 300 300" width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-      <g class="astrolabe-outer" style="transform-origin: 150px 150px;">
-        <circle cx="150" cy="150" r="140" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
-        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
-        <!-- Degree marks -->
-        <g stroke="var(--gold)" stroke-width="1">
-          <line x1="150" y1="10" x2="150" y2="25"/>
-          <line x1="150" y1="275" x2="150" y2="290"/>
-          <line x1="10" y1="150" x2="25" y2="150"/>
-          <line x1="275" y1="150" x2="290" y2="150"/>
-        </g>
-        <!-- Star pointers -->
-        <path d="M150 30 L155 50 L150 45 L145 50 Z" fill="var(--gold)"/>
-        <path d="M150 270 L155 250 L150 255 L145 250 Z" fill="var(--gold)"/>
-        <path d="M30 150 L50 155 L45 150 L50 145 Z" fill="var(--gold)"/>
-        <path d="M270 150 L250 155 L255 150 L250 145 Z" fill="var(--gold)"/>
-      </g>
-      <g class="astrolabe-inner" style="transform-origin: 150px 150px;">
-        <circle cx="150" cy="150" r="90" fill="none" stroke="var(--gold)" stroke-width="1"/>
-        <circle cx="150" cy="150" r="60" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
-        <!-- Inner star -->
-        <path d="M150 70 L157 95 L183 95 L162 110 L169 135 L150 120 L131 135 L138 110 L117 95 L143 95 Z"
-          fill="none" stroke="var(--gold)" stroke-width="0.8"/>
-      </g>
-      <circle cx="150" cy="150" r="5" fill="var(--gold)" opacity="0.5"/>
-    </svg>
-  </div>
-
-  <div class="invitation-container relative z-10 px-6">
-
-    <!-- Section Title -->
-    <div class="text-center mb-12">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">Waktu &amp; Tempat</p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">Detail Acara</h2>
-      <div class="gold-divider mt-4"></div>
     </div>
 
-    <!-- Countdown Timer -->
-    <div id="countdown-container" class="fade-ready text-center mb-14" style="opacity:0;">
-      <p style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1.5rem;">Menuju Hari Bahagia</p>
-      <div class="flex justify-center gap-6" id="countdown-display">
-        <div class="text-center">
-          <span id="cd-days" class="countdown-num">00</span>
-          <p class="countdown-label mt-1">Hari</p>
-        </div>
-        <div class="text-center" style="color: var(--gold-dim); font-family: var(--font-display); font-size: 2.5rem; line-height: 1; padding-top: 0.2rem;">:</div>
-        <div class="text-center">
-          <span id="cd-hours" class="countdown-num">00</span>
-          <p class="countdown-label mt-1">Jam</p>
-        </div>
-        <div class="text-center" style="color: var(--gold-dim); font-family: var(--font-display); font-size: 2.5rem; line-height: 1; padding-top: 0.2rem;">:</div>
-        <div class="text-center">
-          <span id="cd-mins" class="countdown-num">00</span>
-          <p class="countdown-label mt-1">Menit</p>
-        </div>
-        <div class="text-center" style="color: var(--gold-dim); font-family: var(--font-display); font-size: 2.5rem; line-height: 1; padding-top: 0.2rem;">:</div>
-        <div class="text-center">
-          <span id="cd-secs" class="countdown-num">00</span>
-          <p class="countdown-label mt-1">Detik</p>
-        </div>
-      </div>
-    </div>
+    <div class="brush-divider" style="margin:2rem 0;"></div>
 
-    <!-- Event Cards -->
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-
-      <!-- Card 1: Akad Nikah -->
-      <div class="event-card fade-ready p-8 text-center" style="opacity:0; border-radius: 1px;">
-        <div class="mb-4">
-          <svg viewBox="0 0 50 50" width="40" height="40" class="mx-auto mb-3" fill="none" stroke="var(--gold)" stroke-width="1.2">
-            <!-- Crescent moon + ring icon -->
-            <path d="M25 10 Q10 15 10 25 Q10 38 25 42 Q15 35 17 25 Q19 15 25 10 Z" opacity="0.8"/>
-            <circle cx="28" cy="25" r="4" stroke="var(--gold-light)" stroke-width="1.5" opacity="0.9"/>
-            <circle cx="28" cy="25" r="7" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
-          </svg>
-        </div>
-        <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem;">Acara Pertama</p>
-        <h3 class="gold-text" style="font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1rem;">Akad Nikah</h3>
-        <div style="width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); margin: 0 auto 1rem;"></div>
-        <p id="akad-date" style="font-family: var(--font-body); font-style: italic; color: var(--ivory); font-size: 1rem; margin-bottom: 0.5rem;"></p>
-        <p id="akad-time" style="font-family: var(--font-text); font-size: 0.85rem; color: var(--gold-light); letter-spacing: 0.1em; margin-bottom: 0.75rem;"></p>
-        <p id="akad-venue" style="font-family: var(--font-text); font-size: 0.82rem; color: var(--ivory-dim); line-height: 1.7; opacity:0.85;"></p>
-      </div>
-
-      <!-- Card 2: Resepsi -->
-      <div class="event-card fade-ready p-8 text-center" style="opacity:0; border-radius: 1px;">
-        <div class="mb-4">
-          <svg viewBox="0 0 50 50" width="40" height="40" class="mx-auto mb-3" fill="none" stroke="var(--gold)" stroke-width="1.2">
-            <!-- Flowers / celebration icon -->
-            <circle cx="25" cy="25" r="6" opacity="0.8"/>
-            <path d="M25 13 Q27 18 25 19 Q23 18 25 13" opacity="0.6"/>
-            <path d="M25 37 Q27 32 25 31 Q23 32 25 37" opacity="0.6"/>
-            <path d="M13 25 Q18 27 19 25 Q18 23 13 25" opacity="0.6"/>
-            <path d="M37 25 Q32 27 31 25 Q32 23 37 25" opacity="0.6"/>
-            <path d="M16.5 16.5 Q20 20 19.5 21.5 Q18 21 16.5 16.5" opacity="0.5"/>
-            <path d="M33.5 33.5 Q30 30 30.5 28.5 Q32 29 33.5 33.5" opacity="0.5"/>
-            <path d="M33.5 16.5 Q30 20 30.5 21.5 Q32 21 33.5 16.5" opacity="0.5"/>
-            <path d="M16.5 33.5 Q20 30 19.5 28.5 Q18 29 16.5 33.5" opacity="0.5"/>
-          </svg>
-        </div>
-        <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem;">Acara Kedua</p>
-        <h3 class="gold-text" style="font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1rem;">Resepsi Pernikahan</h3>
-        <div style="width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); margin: 0 auto 1rem;"></div>
-        <p id="resepsi-date" style="font-family: var(--font-body); font-style: italic; color: var(--ivory); font-size: 1rem; margin-bottom: 0.5rem;"></p>
-        <p id="resepsi-time" style="font-family: var(--font-text); font-size: 0.85rem; color: var(--gold-light); letter-spacing: 0.1em; margin-bottom: 0.75rem;"></p>
-        <p id="resepsi-venue" style="font-family: var(--font-text); font-size: 0.82rem; color: var(--ivory-dim); line-height: 1.7; opacity:0.85;"></p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 5 — PETA LOKASI
-================================================================ -->
-<section id="section-peta" class="relative py-24 overflow-hidden section-emerald">
-  <div class="invitation-container relative z-10 px-6">
-
-    <div class="text-center mb-10">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">Panduan Menuju Lokasi</p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">Peta Lokasi</h2>
-      <div class="gold-divider mt-4"></div>
-    </div>
-
-    <!-- Map Frame -->
-    <div class="fade-ready map-frame overflow-hidden" style="opacity:0; border-radius: 2px; position: relative;">
-      <iframe
-        id="maps-iframe"
-        width="100%"
-        height="300"
-        style="border:0; display:block; filter: sepia(0.6) saturate(0.7) hue-rotate(180deg) brightness(0.6);"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-
-    <!-- CTA Button -->
-    <div class="text-center mt-8">
-      <a id="maps-link" href="#" target="_blank" rel="noopener noreferrer"
-        class="fade-ready inline-block pulse-btn px-8 py-3"
-        style="font-family: var(--font-text); font-size: 0.85rem; letter-spacing: 0.2em; text-decoration: none; opacity:0;">
-        ✦ Buka di Google Maps ✦
-      </a>
-    </div>
-
-    <!-- Safety note -->
-    <p class="fade-ready text-center mt-6" style="font-family: var(--font-body); font-style: italic; font-size: 0.9rem; color: var(--ivory-dim); line-height: 1.8; opacity:0;">
-      Mohon untuk datang tepat waktu, berkendara dengan aman,<br>
-      dan semoga selamat sampai tujuan. 🌿
-    </p>
-
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 6 — KISAH CINTA (TIMELINE)
-================================================================ -->
-<section id="section-kisah" class="relative py-24 overflow-hidden section-navy">
-  <div class="invitation-container relative z-10 px-6">
-
-    <div class="text-center mb-16">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">Perjalanan Dua Bintang</p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">Kisah Cinta Kami</h2>
-      <div class="gold-divider mt-4"></div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="relative" id="timeline-container">
-      <!-- Vertical line -->
-      <div class="absolute left-1/2 top-0 bottom-0" style="transform: translateX(-50%); width: 1px; background: linear-gradient(180deg, transparent, var(--gold-dim) 10%, var(--gold) 50%, var(--gold-dim) 90%, transparent); pointer-events:none;" id="timeline-line-el"></div>
-
-      <!-- Milestone 1 -->
-      <div class="relative flex items-start mb-16">
-        <div class="fade-ready flex-1 text-right pr-8 sm:pr-12" style="opacity:0;" id="timeline-left-1">
-          <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem;">Januari 2026</p>
-          <h4 class="gold-text" style="font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.5rem;">Pertemuan</h4>
-          <p style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--ivory-dim); line-height: 1.8;">
-            Takdir mempertemukan dua hati di bawah langit yang sama. Sebuah perjumpaan sederhana yang ternyata menjadi awal dari segalanya.
-          </p>
-        </div>
-        <div class="absolute left-1/2 top-1 -translate-x-1/2 z-10">
-          <div class="timeline-star" style="width:18px; height:18px; border-radius:50%;"></div>
-        </div>
-        <div class="flex-1 pl-8 sm:pl-12"></div>
-      </div>
-
-      <!-- Milestone 2 -->
-      <div class="relative flex items-start mb-16">
-        <div class="flex-1 pr-8 sm:pr-12"></div>
-        <div class="absolute left-1/2 top-1 -translate-x-1/2 z-10">
-          <div class="timeline-star" style="width:18px; height:18px; border-radius:50%; animation-delay:0.4s;"></div>
-        </div>
-        <div class="fade-ready flex-1 text-left pl-8 sm:pl-12" style="opacity:0;" id="timeline-right-2">
-          <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem;">Maret 2026</p>
-          <h4 class="gold-text" style="font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.5rem;">Komitmen</h4>
-          <p style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--ivory-dim); line-height: 1.8;">
-            Setelah merasakan ketenangan di sisi satu sama lain, kami memutuskan untuk melangkah lebih jauh. Komitmen bukan hanya janji, melainkan pilihan setiap harinya.
-          </p>
-        </div>
-      </div>
-
-      <!-- Milestone 3 -->
-      <div class="relative flex items-start">
-        <div class="fade-ready flex-1 text-right pr-8 sm:pr-12" style="opacity:0;" id="timeline-left-3">
-          <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem;">Mei 2026</p>
-          <h4 class="gold-text" style="font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.5rem;">Lamaran</h4>
-          <p style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--ivory-dim); line-height: 1.8;">
-            Di bawah cahaya bintang dan doa keluarga, Sofyan melamar Sixtin dengan segenap hati. Sebuah momen yang akan selalu kami kenang sepanjang hayat.
-          </p>
-        </div>
-        <div class="absolute left-1/2 top-1 -translate-x-1/2 z-10">
-          <div class="timeline-star" style="width:18px; height:18px; border-radius:50%; animation-delay:0.8s;"></div>
-        </div>
-        <div class="flex-1 pl-8 sm:pl-12"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 7 — RSVP & BUKU TAMU
-================================================================ -->
-<section id="section-rsvp" class="relative py-24 overflow-hidden section-emerald">
-  <div class="invitation-container relative z-10 px-6">
-
-    <div class="text-center mb-12">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">Konfirmasi &amp; Doa</p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">RSVP &amp; Buku Tamu</h2>
-      <div class="gold-divider mt-4"></div>
-    </div>
-
-    <!-- RSVP Form -->
-    <div class="fade-ready mb-14 max-w-md mx-auto" style="opacity:0;">
-      <div class="space-y-4">
-        <div>
-          <label style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); display: block; margin-bottom: 0.5rem;">Nama Tamu</label>
-          <input type="text" id="rsvp-name" class="rsvp-input" placeholder="Masukkan nama Anda..." />
-        </div>
-        <div>
-          <label style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); display: block; margin-bottom: 0.5rem;">Konfirmasi Kehadiran</label>
-          <select id="rsvp-attend" class="rsvp-input">
-            <option value="">— Pilih Konfirmasi —</option>
-            <option value="hadir">✓ Ya, Saya Hadir</option>
-            <option value="tidak">✗ Maaf, Tidak Bisa Hadir</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); display: block; margin-bottom: 0.5rem;">Jumlah Tamu yang Hadir</label>
-          <input type="number" id="rsvp-count" class="rsvp-input" min="1" max="10" placeholder="1" />
-        </div>
-        <div>
-          <label style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); display: block; margin-bottom: 0.5rem;">Ucapan &amp; Doa Restu</label>
-          <textarea id="rsvp-message" class="rsvp-input" rows="3" placeholder="Tuliskan doa dan ucapan terbaik Anda..."></textarea>
-        </div>
-        <button id="rsvp-submit" class="pulse-btn w-full py-3" style="font-family: var(--font-text); font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase;">
-          ✦ Kirim Konfirmasi ✦
-        </button>
-      </div>
-    </div>
-
-    <!-- Guest Book Wall -->
-    <div class="text-center mb-6">
-      <p style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim);">Ucapan &amp; Doa Restu</p>
-    </div>
-    <div id="wishes-wall" class="space-y-4">
-      <!-- Pre-filled wishes -->
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 8 — KADO DIGITAL / TANDA KASIH
-================================================================ -->
-<section id="section-kado" class="relative py-24 overflow-hidden section-navy">
-  <div class="invitation-container relative z-10 px-6">
-
-    <div class="text-center mb-12">
-      <p class="fade-ready" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem; opacity:0;">Tanda Kasih</p>
-      <h2 class="fade-ready gold-text" style="font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2rem); opacity:0;">Kado Digital</h2>
-      <div class="gold-divider mt-4"></div>
-    </div>
-
-    <!-- Intro text -->
-    <p class="fade-ready text-center mb-10 max-w-md mx-auto" style="font-family: var(--font-body); font-style: italic; font-size: 1rem; color: var(--ivory-dim); line-height: 1.8; opacity:0;" id="kado-intro-text">
-      Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih untuk mengiringi langkah baru kami, dapat melalui:
-    </p>
-
-    <!-- Bank Cards -->
-    <div id="bank-cards-container" class="space-y-4 mb-10">
-      <!-- dynamically rendered from CONFIG -->
-    </div>
-
-    <!-- Shipping Address -->
-    <div class="fade-ready gift-card p-8 text-center max-w-md mx-auto" style="opacity:0; border-radius: 1px;" id="address-card">
-      <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem;">Atau Kirim Kado ke Alamat</p>
-      <svg viewBox="0 0 40 40" width="32" height="32" class="mx-auto mb-3" fill="none" stroke="var(--gold)" stroke-width="1.2">
-        <path d="M20 5 C12 5 6 11 6 18 C6 28 20 38 20 38 C20 38 34 28 34 18 C34 11 28 5 20 5 Z"/>
-        <circle cx="20" cy="18" r="5"/>
-      </svg>
-      <p id="shipping-address-display" style="font-family: var(--font-body); font-size: 0.95rem; color: var(--ivory); line-height: 1.8; margin-bottom: 1rem;"></p>
-      <button class="copy-btn pulse-btn relative overflow-hidden px-6 py-2" style="font-family: var(--font-text); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;" data-copy-type="address">
-        Salin Alamat
-      </button>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================================================
-     SECTION 9 — HALAMAN PENUTUP
-================================================================ -->
-<section id="section-penutup" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20"
-  style="background: radial-gradient(ellipse at 50% 40%, #0f2040 0%, #0B1325 60%, #060e1a 100%);">
-
-  <!-- Rotating Milky Way BG -->
-  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-    <svg viewBox="0 0 600 600" width="800" height="800" xmlns="http://www.w3.org/2000/svg"
-      style="animation: astrolabeRotate 80s linear infinite; transform-origin: center; opacity:0.04;">
-      <!-- Milky Way rings -->
-      <ellipse cx="300" cy="300" rx="280" ry="80" fill="none" stroke="var(--gold)" stroke-width="1"/>
-      <ellipse cx="300" cy="300" rx="220" ry="60" fill="none" stroke="var(--gold)" stroke-width="0.7"/>
-      <ellipse cx="300" cy="300" rx="160" ry="45" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
-      <ellipse cx="300" cy="300" rx="100" ry="30" fill="none" stroke="var(--gold)" stroke-width="0.3"/>
-      <!-- Star clusters -->
-      <circle cx="180" cy="290" r="2" fill="var(--gold)"/>
-      <circle cx="420" cy="310" r="2" fill="var(--gold)"/>
-      <circle cx="300" cy="240" r="1.5" fill="var(--gold)"/>
-      <circle cx="300" cy="360" r="1.5" fill="var(--gold)"/>
-    </svg>
-  </div>
-
-  <!-- Mist bottom -->
-  <div class="mist-layer" style="opacity:0.3;"></div>
-
-  <div class="invitation-container relative z-10 px-6 text-center">
-
-    <!-- Closing text -->
-    <div class="fade-ready mb-8" style="opacity:0;">
-      <p style="font-family: var(--font-body); font-size: 1rem; color: var(--ivory-dim); line-height: 2; max-width: 480px; margin: 0 auto;">
-        Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih yang sebesar-besarnya.
+    <div class="reveal" style="text-align:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--ivory-dark);line-height:1.8;">
+        Merupakan suatu kebahagiaan dan kehormatan bagi kami<br/>apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan<br/>doa restu kepada kami.
       </p>
     </div>
-
-    <div class="diamond-divider my-8" style="color: var(--gold);">❖</div>
-
-    <!-- Closing Couple SVG -->
-    <div class="fade-ready couple-float mx-auto mb-8" style="opacity:0; width: 220px; height: 180px; position: relative;">
-      <svg viewBox="0 0 220 180" width="220" height="180" xmlns="http://www.w3.org/2000/svg">
-        <!-- Bride (left, simplified) -->
-        <g transform="translate(30,0)">
-          <circle cx="30" cy="25" r="14" fill="none" stroke="var(--gold)" stroke-width="1.2" opacity="0.85"/>
-          <path d="M20 22 Q16 14 30 12 Q44 14 40 22" fill="rgba(212,175,55,0.1)" stroke="var(--gold)" stroke-width="0.8" opacity="0.7"/>
-          <path d="M22 39 Q10 70 8 110 Q7 130 30 134 Q53 130 52 110 Q50 70 38 39 Q34 43 30 45 Q26 43 22 39 Z"
-            fill="rgba(212,175,55,0.07)" stroke="var(--gold)" stroke-width="0.9" opacity="0.8" class="bride-dress"/>
-          <!-- Waving arm -->
-          <g class="arm-wave" transform="translate(42,55)">
-            <line x1="0" y1="0" x2="18" y2="-12" stroke="var(--ivory)" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="20" cy="-14" r="4" fill="rgba(253,251,247,0.15)" stroke="var(--ivory)" stroke-width="1"/>
-          </g>
-        </g>
-        <!-- Groom (right, simplified) -->
-        <g transform="translate(120,0)">
-          <circle cx="30" cy="25" r="14" fill="none" stroke="var(--ivory)" stroke-width="1.2" opacity="0.8"/>
-          <path d="M20 20 Q20 13 30 12 Q40 13 40 20" fill="rgba(212,175,55,0.1)" stroke="var(--gold)" stroke-width="0.8" opacity="0.8"/>
-          <rect x="18" y="39" width="24" height="95" rx="2" fill="rgba(253,251,247,0.06)" stroke="var(--ivory)" stroke-width="0.9" opacity="0.75" class="groom-breathe"/>
-          <!-- Waving arm -->
-          <g class="arm-wave" transform="translate(18,55)" style="animation-delay:0.3s;">
-            <line x1="0" y1="0" x2="-18" y2="-12" stroke="var(--ivory)" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="-20" cy="-14" r="4" fill="rgba(253,251,247,0.15)" stroke="var(--ivory)" stroke-width="1"/>
-          </g>
-        </g>
-        <!-- Holding hands -->
-        <line x1="82" y1="85" x2="138" y2="85" stroke="var(--gold)" stroke-width="1" opacity="0.5" stroke-dasharray="3 3"/>
-        <!-- Heart above -->
-        <path d="M110 40 Q104 35 100 38 Q96 41 100 47 Q104 53 110 58 Q116 53 120 47 Q124 41 120 38 Q116 35 110 40 Z"
-          fill="rgba(212,175,55,0.12)" stroke="var(--gold)" stroke-width="0.8" opacity="0.7"/>
-      </svg>
-    </div>
-
-    <!-- Names -->
-    <h2 class="fade-ready gold-text mb-3" style="font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.8rem); opacity:0;">
-      Sixtin &amp; Sofyan
-    </h2>
-
-    <div class="diamond-divider my-6" style="color: var(--gold);">❖</div>
-
-    <!-- Family -->
-    <p class="fade-ready" style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--ivory-dim); line-height: 2; opacity:0;">
-      Kami yang berbahagia,<br>
-      <span style="color: var(--gold-light);">Keluarga Besar Kurniadi &amp; Keluarga Besar Slamet Dalban</span>
-    </p>
-
-    <div class="my-10">
-      <p style="font-family: var(--font-text); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.5rem;">Salam Hangat</p>
-      <p style="font-family: var(--font-body); font-style: italic; font-size: 1rem; color: var(--ivory-dim); opacity:0.85;">
-        وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-      </p>
-    </div>
-
-  </div>
-
-  <!-- Footer Credit -->
-  <div class="absolute bottom-4 w-full text-center">
-    <p class="footer-credit" style="font-family: var(--font-text); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim);">
-      Lang Studio
-    </p>
   </div>
 </section>
-
-
-<!-- ================================================================
-     JAVASCRIPT
-================================================================ -->
-<script>
-// ============================================================
-// INVITATION CONFIGURATION — Edit all content here
-// ============================================================
-const INVITATION_CONFIG = {
-
-  // ---- COUPLE ----
-  bride: {
-    nickname: "Sixtin",
-    fullName: "Sixtin Kristiana",
-    fatherName: "Alm. Bapak Slamet Dalban",
-    motherName: "Ibu Munarti",
-    address: "Pagilaran, Kec. Blado, Kab. Batang"
-  },
-  groom: {
-    nickname: "Sofyan",
-    fullName: "Sofyan Kurniadi",
-    fatherName: "Bapak Kurniadi",
-    motherName: "Ibu Sri Wahyuni",
-    address: "Wonokerto, Kec. Bandar, Kab. Batang"
-  },
-  families: {
-    groomFamily: "Keluarga Besar Kurniadi",
-    brideFamily: "Keluarga Besar Slamet Dalban"
-  },
-
-  // ---- EVENTS ----
-  events: {
-    akad: {
-      name: "Akad Nikah",
-      date: "Minggu, 7 Juni 2026",
-      time: "07.00 - Selesai WIB",
-      venue: "Gedung Pertemuan Pagilaran",
-      address: "Keteleng, Kec. Blado, Kab. Batang"
-    },
-    resepsi: {
-      name: "Resepsi Pernikahan",
-      date: "Minggu, 7 Juni 2026",
-      time: "11.00 - 13.00 WIB",
-      venue: "Gedung Pertemuan Pagilaran",
-      address: "Keteleng, Kec. Blado, Kab. Batang"
-    }
-  },
-
-  // ---- COUNTDOWN TARGET ----
-  weddingDate: "2026-06-07T07:00:00+07:00",
-
-  // ---- MAPS ----
-  maps: {
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0!2d109.85!3d-7.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDMnMDAuMCJTIDEwOcKwNTEnMDAuMCJF!5e0!3m2!1sen!2sid!4v1234567890",
-    navigationUrl: "https://maps.google.com/?q=Gedung+Pertemuan+Pagilaran+Keteleng+Blado+Batang",
-    locationName: "Gedung Pertemuan Pagilaran, Keteleng"
-  },
-
-  // ---- MUSIC ----
-  music: {
-    src: "https://www.bensound.com/bensound-music/bensound-romantic.mp3",
-    title: "Musik Latar — Instrumentalia"
-  },
-
-  // ---- BANK ACCOUNTS ----
-  bankAccounts: [
-    {
-      bankName: "Bank BRI",
-      accountNumber: "1234-5678-9012-3456",
-      accountName: "Sixtin Kristiana",
-      logo: "BRI"
-    },
-    {
-      bankName: "Bank Mandiri",
-      accountNumber: "9876-5432-1098-7654",
-      accountName: "Sofyan Kurniadi",
-      logo: "Mandiri"
-    }
-  ],
-
-  // ---- SHIPPING ADDRESS ----
-  shippingAddress: "Sixtin Kristiana\nDusun Pagilaran RT 03/RW 02,\nKec. Blado, Kab. Batang,\nJawa Tengah 51255",
-
-  // ---- RSVP ----
-  rsvpSheetUrl: ""
-};
-
-// ============================================================
-// UTILITY: Get guest name from URL param
-// ============================================================
-function getGuestName() {
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get('to');
-  return name ? decodeURIComponent(name.replace(/\+/g, ' ')) : 'Sahabat & Kerabat';
-}
-
-// ============================================================
-// STARS CANVAS
-// ============================================================
-(function initStars() {
-  const canvas = document.getElementById('stars-canvas');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  let W, H;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function createStar() {
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.5 + 0.3,
-      alpha: Math.random(),
-      speed: Math.random() * 0.008 + 0.002,
-      phase: Math.random() * Math.PI * 2
-    };
-  }
-
-  function init() {
-    resize();
-    stars = Array.from({ length: 200 }, createStar);
-  }
-
-  function draw(t) {
-    ctx.clearRect(0, 0, W, H);
-    stars.forEach(s => {
-      s.alpha = 0.3 + 0.7 * Math.abs(Math.sin(s.speed * t + s.phase));
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(253,251,247,${s.alpha * 0.85})`;
-      ctx.shadowBlur = 4;
-      ctx.shadowColor = 'rgba(212,175,55,0.6)';
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  init();
-  requestAnimationFrame(draw);
-})();
-
-// ============================================================
-// POPULATE CONFIG DATA INTO DOM
-// ============================================================
-function populateConfig() {
-  const C = INVITATION_CONFIG;
-
-  // Guest name
-  document.getElementById('guest-name-display').textContent = getGuestName();
-
-  // Events
-  const ae = C.events.akad;
-  document.getElementById('akad-date').textContent = ae.date;
-  document.getElementById('akad-time').textContent = ae.time;
-  document.getElementById('akad-venue').innerHTML = `${ae.venue}<br>${ae.address}`;
-
-  const re = C.events.resepsi;
-  document.getElementById('resepsi-date').textContent = re.date;
-  document.getElementById('resepsi-time').textContent = re.time;
-  document.getElementById('resepsi-venue').innerHTML = `${re.venue}<br>${re.address}`;
-
-  // Maps
-  document.getElementById('maps-iframe').src = C.maps.embedUrl;
-  document.getElementById('maps-link').href = C.maps.navigationUrl;
-
-  // Music
-  document.getElementById('bg-music').src = C.music.src;
-
-  // Shipping address
-  document.getElementById('shipping-address-display').textContent = C.shippingAddress;
-
-  // Bank cards
-  const container = document.getElementById('bank-cards-container');
-  C.bankAccounts.forEach(bank => {
-    const card = document.createElement('div');
-    card.className = 'fade-ready gift-card p-6 flex items-center gap-4 justify-between';
-    card.style.cssText = 'opacity:0; border-radius:1px;';
-    card.innerHTML = `
-      <div class="flex-1">
-        <p style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.4rem;">${bank.bankName}</p>
-        <p style="font-family: var(--font-display); font-size: 1rem; color: var(--gold-light); letter-spacing: 0.05em; margin-bottom: 0.3rem;">${bank.accountNumber}</p>
-        <p style="font-family: var(--font-text); font-size: 0.85rem; color: var(--ivory-dim);">a.n. ${bank.accountName}</p>
-      </div>
-      <button class="copy-btn pulse-btn relative overflow-hidden px-4 py-2" 
-        style="font-family: var(--font-text); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap;"
-        data-copy-type="bank" data-copy-value="${bank.accountNumber}">
-        Salin Rekening
-      </button>
-    `;
-    container.appendChild(card);
-  });
-}
-
-// ============================================================
-// COUNTDOWN TIMER
-// ============================================================
-function initCountdown() {
-  const target = new Date(INVITATION_CONFIG.weddingDate).getTime();
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function updateCountdown() {
-    const now = Date.now();
-    const diff = Math.max(0, target - now);
-
-    const days  = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins  = Math.floor((diff % 3600000) / 60000);
-    const secs  = Math.floor((diff % 60000) / 1000);
-
-    function setNum(el, val) {
-      const oldVal = el.textContent;
-      const newVal = pad(val);
-      if (oldVal !== newVal) {
-        el.style.opacity = '0';
-        setTimeout(() => {
-          el.textContent = newVal;
-          el.style.opacity = '1';
-        }, 150);
-      }
-    }
-
-    setNum(document.getElementById('cd-days'),  days);
-    setNum(document.getElementById('cd-hours'), hours);
-    setNum(document.getElementById('cd-mins'),  mins);
-    setNum(document.getElementById('cd-secs'),  secs);
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-// ============================================================
-// MUSIC PLAYER
-// ============================================================
-let musicPlaying = false;
-let musicStarted  = false;
-
-function startMusic() {
-  if (!musicStarted) {
-    const audio = document.getElementById('bg-music');
-    audio.volume = 0.4;
-    audio.play().catch(() => {});
-    musicPlaying = true;
-    musicStarted = true;
-    updateMusicIcon();
-  }
-}
-
-function updateMusicIcon() {
-  const icon = document.getElementById('music-icon');
-  if (musicPlaying) {
-    icon.innerHTML = `
-      <path d="M9 18V5l12-2v13"/>
-      <circle cx="6" cy="18" r="3"/>
-      <circle cx="18" cy="16" r="3"/>
-    `;
-  } else {
-    icon.innerHTML = `
-      <line x1="1" y1="1" x2="23" y2="23"/>
-      <path d="M9 9v9l12 2V7"/>
-      <circle cx="6" cy="18" r="3"/>
-      <circle cx="18" cy="16" r="3"/>
-    `;
-  }
-}
-
-document.getElementById('music-toggle').addEventListener('click', () => {
-  const audio = document.getElementById('bg-music');
-  if (musicPlaying) {
-    audio.pause();
-    musicPlaying = false;
-  } else {
-    audio.play().catch(() => {});
-    musicPlaying = true;
-  }
-  updateMusicIcon();
-});
-
-// ============================================================
-// OPEN BUTTON — Cover slide-up transition
-// ============================================================
-document.getElementById('open-btn').addEventListener('click', () => {
-  const overlay = document.getElementById('cover-overlay');
-  overlay.classList.add('slide-up');
-  startMusic();
-  setTimeout(() => {
-    const section2 = document.getElementById('section-pembuka');
-    section2.scrollIntoView({ behavior: 'smooth' });
-  }, 800);
-});
-
-// ============================================================
-// FIREFLIES
-// ============================================================
-function initFireflies() {
-  const container = document.getElementById('fireflies-container');
-  const count = 20;
-
-  for (let i = 0; i < count; i++) {
-    const ff = document.createElement('div');
-    ff.className = 'firefly';
-    const size = Math.random() * 3 + 2;
-    ff.style.cssText = `
-      left: ${Math.random() * 100}%;
-      top: ${Math.random() * 100}%;
-      width: ${size}px;
-      height: ${size}px;
-    `;
-    container.appendChild(ff);
-
-    gsap.to(ff, {
-      x: (Math.random() - 0.5) * 200,
-      y: (Math.random() - 0.5) * 200,
-      opacity: Math.random() * 0.8 + 0.2,
-      duration: Math.random() * 6 + 4,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      delay: Math.random() * 4
-    });
-
-    gsap.to(ff, {
-      scale: Math.random() * 1.5 + 0.5,
-      duration: Math.random() * 2 + 1,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      delay: Math.random() * 2
-    });
-  }
-}
-
-// ============================================================
-// COVER ANIMATIONS (load)
-// ============================================================
-function initCoverAnimations() {
-  const tl = gsap.timeline({ delay: 0.3 });
-  tl.to('#cover-bismillah', { opacity: 1, y: 0, duration: 1, ease: 'power2.out' })
-    .to('#cover-label',    { opacity: 0.85, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
-    .to('#cover-names',    { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.5')
-    .to('#cover-date',     { opacity: 0.7, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5')
-    .to('#cover-divider',  { opacity: 1, duration: 0.6 }, '-=0.3')
-    .to('#guest-box',      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
-    .to('#open-btn',       { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.4');
-}
-
-// ============================================================
-// GSAP SCROLL ANIMATIONS
-// ============================================================
-function initScrollAnimations() {
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Helper: fade up elements
-  function fadeUp(selector, options = {}) {
-    gsap.utils.toArray(selector).forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 40 },
-        {
-          opacity: el._origOpacity || 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power2.out',
-          delay: (options.stagger || 0.15) * i,
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-            ...options.trigger
-          }
-        }
-      );
-    });
-  }
-
-  // Section 2 – Pembuka lines
-  gsap.utils.toArray('.pembuka-line').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: i * 0.2,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 3 – Profiles
-  gsap.fromTo('#bride-card',
-    { opacity: 0, x: -60 },
-    { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '#section-profil', start: 'top 70%', toggleActions: 'play none none none' } }
-  );
-  gsap.fromTo('#groom-card',
-    { opacity: 0, x: 60 },
-    { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '#section-profil', start: 'top 70%', toggleActions: 'play none none none' } }
-  );
-
-  // Section 4 – Event cards
-  gsap.utils.toArray('#section-acara .fade-ready').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, scale: 0.92, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: i * 0.15,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 5 – Maps
-  gsap.utils.toArray('#section-peta .fade-ready').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: i * 0.2,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 6 – Timeline items
-  gsap.fromTo('#timeline-left-1',
-    { opacity: 0, x: -50 },
-    { opacity: 1, x: 0, duration: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: '#timeline-left-1', start: 'top 80%', toggleActions: 'play none none none' } }
-  );
-  gsap.fromTo('#timeline-right-2',
-    { opacity: 0, x: 50 },
-    { opacity: 1, x: 0, duration: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: '#timeline-right-2', start: 'top 80%', toggleActions: 'play none none none' } }
-  );
-  gsap.fromTo('#timeline-left-3',
-    { opacity: 0, x: -50 },
-    { opacity: 1, x: 0, duration: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: '#timeline-left-3', start: 'top 80%', toggleActions: 'play none none none' } }
-  );
-
-  // Section 6 – Section titles
-  gsap.utils.toArray('#section-kisah .fade-ready:not(#timeline-left-1):not(#timeline-right-2):not(#timeline-left-3)').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: i * 0.15,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 7 – RSVP
-  gsap.utils.toArray('#section-rsvp .fade-ready').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: i * 0.15,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 8 – Kado
-  gsap.utils.toArray('#section-kado .fade-ready').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: i * 0.12,
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
-    );
-  });
-
-  // Section 9 – Penutup
-  gsap.utils.toArray('#section-penutup .fade-ready').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: i * 0.2,
-        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }
-    );
-  });
-}
-
-// ============================================================
-// RSVP FORM — Shooting star on submit
-// ============================================================
-const preloadedWishes = [
-  { name: "Keluarga Budi S.", attend: "hadir", message: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fi khair. Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Aamiin." },
-  { name: "Dewi Rahayu", attend: "hadir", message: "Selamat menempuh hidup baru, semoga selalu diberkahi Allah SWT. Doa terbaik selalu mengiringi langkah kalian! 💫" },
-  { name: "Ahmad Fauzi", attend: "hadir", message: "Congratulations! Semoga pernikahan ini menjadi awal dari kebahagiaan yang tiada akhir. Langgeng selalu yaa!" }
-];
-
-function renderWish(wish) {
-  const wall = document.getElementById('wishes-wall');
-  const card = document.createElement('div');
-  card.className = 'wish-card p-6';
-  card.style.cssText = 'opacity:0; transform: translateY(20px); transition: all 0.6s ease; border-radius: 1px;';
-  card.innerHTML = `
-    <p style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--ivory); line-height: 1.8; margin-bottom: 0.75rem; padding-left: 1rem;">${wish.message}</p>
-    <div style="display:flex; align-items:center; gap: 0.75rem; padding-left: 1rem;">
-      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); display:flex; align-items:center; justify-content:center; font-size:0.8rem; color: var(--gold);">✦</div>
-      <div>
-        <p style="font-family: var(--font-text); font-size: 0.8rem; color: var(--gold-light); letter-spacing: 0.1em;">${wish.name}</p>
-        <p style="font-family: var(--font-text); font-size: 0.7rem; color: var(--ivory-dim); opacity:0.6;">${wish.attend === 'hadir' ? '✓ Hadir' : '— Berhalangan'}</p>
-      </div>
-    </div>
-  `;
-  wall.prepend(card);
-  setTimeout(() => {
-    card.style.opacity = '1';
-    card.style.transform = 'translateY(0)';
-  }, 50);
-}
-
-function launchShootingStar() {
-  const star = document.createElement('div');
-  star.className = 'shooting-star';
-  star.style.cssText = `
-    top: ${Math.random() * 40 + 10}%;
-    left: -20px;
-  `;
-  document.body.appendChild(star);
-  gsap.to(star, {
-    x: window.innerWidth + 100,
-    y: (Math.random() - 0.5) * 200,
-    duration: 1.2,
-    ease: 'power2.in',
-    onComplete: () => star.remove()
-  });
-}
-
-document.getElementById('rsvp-submit').addEventListener('click', () => {
-  const name    = document.getElementById('rsvp-name').value.trim();
-  const attend  = document.getElementById('rsvp-attend').value;
-  const message = document.getElementById('rsvp-message').value.trim();
-
-  if (!name || !attend || !message) {
-    gsap.fromTo('#rsvp-submit', { x: -5 }, { x: 5, duration: 0.1, yoyo: true, repeat: 5, ease: 'none' });
-    return;
-  }
-
-  // Shooting star animation
-  for (let i = 0; i < 3; i++) {
-    setTimeout(() => launchShootingStar(), i * 250);
-  }
-
-  // Add to wish wall
-  renderWish({ name, attend, message });
-
-  // Reset form
-  document.getElementById('rsvp-name').value    = '';
-  document.getElementById('rsvp-attend').value  = '';
-  document.getElementById('rsvp-count').value   = '';
-  document.getElementById('rsvp-message').value = '';
-
-  // Button feedback
-  const btn = document.getElementById('rsvp-submit');
-  btn.textContent = '✨ Terkirim! ✨';
-  setTimeout(() => { btn.innerHTML = '✦ Kirim Konfirmasi ✦'; }, 3000);
-});
-
-// ============================================================
-// COPY BUTTONS
-// ============================================================
-function createSparkles(button) {
-  for (let i = 0; i < 10; i++) {
-    const spark = document.createElement('span');
-    spark.className = 'sparkle-particle';
-    const angle = (i / 10) * Math.PI * 2;
-    const dist  = Math.random() * 40 + 20;
-    spark.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
-    spark.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
-    spark.textContent = ['✦', '✧', '⋆', '★'][Math.floor(Math.random() * 4)];
-    spark.style.cssText += `left: 50%; top: 50%; color: var(--gold); position: absolute; pointer-events:none; animation: sparkleFly 0.8s ease-out forwards;`;
-    button.appendChild(spark);
-    setTimeout(() => spark.remove(), 900);
-  }
-}
-
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.copy-btn');
-  if (!btn) return;
-
-  const type  = btn.dataset.copyType;
-  const value = type === 'address'
-    ? INVITATION_CONFIG.shippingAddress
-    : btn.dataset.copyValue;
-
-  navigator.clipboard.writeText(value).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = value;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    ta.remove();
-  });
-
-  createSparkles(btn);
-  const original = btn.textContent;
-  btn.textContent = 'Tersalin! ✨';
-  setTimeout(() => { btn.textContent = original; }, 2500);
-});
-
-// ============================================================
-// PRE-LOAD WISHES
-// ============================================================
-function initWishes() {
-  preloadedWishes.forEach(w => renderWish(w));
-}
-
-// ============================================================
-// INIT ALL
-// ============================================================
-window.addEventListener('DOMContentLoaded', () => {
-  populateConfig();
-  initCoverAnimations();
-  initFireflies();
-  initCountdown();
-  initScrollAnimations();
-  initWishes();
-});
-</script>
-
-</body>
-</html>
