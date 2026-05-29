@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan - Sixtin & Sofyan</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Playfair Display (Serif), Alex Brush (Classic Script), Plus Jakarta Sans (Clean Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'retro-beige': '#f5efe6', // Warm Beige/Ivory
+            'retro-terracotta': '#c96f53', // Terracotta
+            'retro-orange': '#bd5338', // Burnt Orange
+            'retro-sage': '#8fa89b', // Muted Sage Green
+            'retro-dark': '#3d251e', // Dark Brownish Retro
+          },
+          fontFamily {
+            serif: ['"Playfair Display"', 'serif'],
+            script: ['"Alex Brush"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Grain/Noise Texture Overlay */
+    .grain-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Elegant Font Utilities */
+    .font-script { font-family: 'Alex Brush', cursive; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* Custom Transitions & Keyframes */
+    .liquid-open {
+      transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s ease-in-out;
+    }
+
+    @keyframes micro-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .animate-micro-bounce {
+      animation: micro-bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes rotate-vinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-vinyl {
+      animation: rotate-vinyl 4s linear infinite;
+    }
+
+    /* Animated SVG Character States */
+    @keyframes wave-arm {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(15deg); }
+    }
+    .char-arm-female {
+      transform-origin: 45px 65px;
+      animation: wave-arm 3s infinite ease-in-out;
+    }
+    .char-arm-male {
+      transform-origin: 55px 65px;
+      animation: wave-arm 3s infinite ease-in-out reverse;
+    }
+
+    @keyframes eyes-blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+    .char-eyes {
+      transform-origin: 50px 42px;
+      animation: eyes-blink 4s infinite ease-in-out;
+    }
+
+    /* Scroll animations */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .reveal-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Paper Airplane Animation Class */
+    @keyframes fly-away {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: translate(300px, -300px) scale(0.3) rotate(15deg); opacity: 0; }
+    }
+    .plane-fly {
+      animation: fly-away 1.5s forwards cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5efe6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c96f53;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-retro-beige text-retro-dark font-sans overflow-x-hidden relative">
+
+  <!-- Grain Overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- Dynamic Notification / Toast -->
+  <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-retro-orange text-retro-beige px-6 py-3 rounded-full shadow-lg z-[9999] opacity-0 pointer-events-none transition-all duration-300 font-medium text-sm">
+    Berhasil disalin!
+  </div>
+
+  <!-- Antique Stamp Transition Overlay -->
+  <div id="stamp-overlay" class="fixed inset-0 bg-retro-dark bg-opacity-90 flex items-center justify-center z-[10000] opacity-0 pointer-events-none transition-all duration-500">
+    <div class="transform scale-50 transition-transform duration-500" id="stamp-box">
+      <svg class="w-48 h-48 text-retro-terracotta animate-pulse" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="50" cy="50" r="45" stroke-dasharray="4 4"/>
+        <circle cx="50" cy="50" r="40"/>
+        <text x="50" y="44" font-family="Playfair Display" font-size="12" fill="currentColor" text-anchor="middle" font-weight="bold">S & S</text>
+        <path d="M 30 52 L 70 52" stroke="currentColor" stroke-width="1.5"/>
+        <text x="50" y="65" font-family="Plus Jakarta Sans" font-size="6" fill="currentColor" text-anchor="middle" letter-spacing="2">07.06.2026</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- MUSIC BACKGROUND ELEMENT -->
+  <audio id="bg-music" loop></audio>
+
+  <!-- VINYL MUSIC CONTROLLER -->
+  <div id="music-controller" class="fixed bottom-6 right-6 z-[999] hidden">
+    <button onclick="toggleMusic()" class="relative group focus:outline-none" aria-label="Kontrol Musik">
+      <div class="absolute inset-0 bg-retro-terracotta rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+      <!-- Vinyl SVG -->
+      <svg id="vinyl-record" class="w-12 h-12 text-retro-dark transition-transform" viewBox="0 0 100 100" fill="currentColor">
+        <circle cx="50" cy="50" r="48" fill="#1e1310"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#3d251e" stroke-width="1"/>
+        <circle cx="50" cy="50" r="32" fill="none" stroke="#3d251e" stroke-width="1"/>
+        <circle cx="50" cy="50" r="24" fill="none" stroke="#3d251e" stroke-width="1"/>
+        <circle cx="50" cy="50" r="16" fill="#c96f53"/>
+        <circle cx="50" cy="50" r="6" fill="#f5efe6"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- 1. COVER / SAMPO (The Vintage First Impression) -->
+  <section id="cover-page" class="fixed inset-0 z-[1000] bg-retro-beige flex flex-col justify-between items-center py-12 px-6 overflow-hidden">
+    <!-- Top Decorative Line -->
+    <div class="w-full max-w-md flex items-center justify-center space-x-4 opacity-80">
+      <div class="h-[1px] bg-retro-terracotta flex-1"></div>
+      <span class="font-serif italic text-xs tracking-widest text-retro-terracotta">PERNIKAHAN SUCI</span>
+      <div class="h-[1px] bg-retro-terracotta flex-1"></div>
+    </div>
+
+    <!-- Center Arch & Animated Character Cover -->
+    <div class="relative w-full max-w-xs flex flex-col items-center my-auto">
+      <!-- Terracotta Arch Frame -->
+      <div class="w-64 h-80 rounded-t-full border-2 border-retro-terracotta p-3 relative flex items-center justify-center">
+        <!-- Inner Arch Backdrop -->
+        <div class="w-full h-full rounded-t-full bg-retro-terracotta bg-opacity-10 absolute inset-0 -z-10"></div>
+        
+        <!-- Animated Retro Character Pair Line Art SVG -->
+        <svg class="w-48 h-64 text-retro-dark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <!-- Mountain/Sunset Background inside arch -->
+          <path d="M 15 80 Q 50 60 85 80" stroke-dasharray="2 2" stroke="currentColor"/>
+          <circle cx="50" cy="35" r="8" stroke="currentColor" stroke-dasharray="1 1" />
+          
+          <!-- Male Character (Sofyan) -->
+          <g transform="translate(-10, 10)">
+            <path d="M 40 90 L 40 65 L 45 65 L 45 90" stroke="currentColor" fill="none"/> <!-- Legs -->
+            <path d="M 33 65 Q 43 55 47 65 Z" fill="none"/> <!-- Torso/Suit -->
+            <line x1="47" y1="65" x2="43" y2="78" stroke="currentColor"/> <!-- Arm -->
+            <circle cx="43" cy="48" r="6"/> <!-- Head -->
+            <path d="M 37 45 Q 43 40 45 46" fill="currentColor"/> <!-- Retro Hair Pomp -->
+          </g>
+
+          <!-- Female Character (Sixtin) -->
+          <g transform="translate(10, 10)">
+            <path d="M 55 90 L 58 70 L 62 70 L 65 90" stroke="currentColor" fill="none"/> <!-- Skirt/Legs -->
+            <path d="M 53 70 Q 60 55 67 70 Z" fill="none"/> <!-- Vintage Gown -->
+            <!-- Blinking Eyes -->
+            <g class="char-eyes">
+              <circle cx="58" cy="48" r="0.5" fill="currentColor"/>
+              <circle cx="62" cy="48" r="0.5" fill="currentColor"/>
+            </g>
+            <!-- Waving Arm/Holding Flower -->
+            <g class="char-arm-female">
+              <line x1="53" y1="60" x2="48" y2="52" stroke="currentColor"/>
+              <circle cx="48" cy="52" r="2" fill="none" stroke="currentColor"/> <!-- Flower -->
+            </g>
+            <circle cx="60" cy="48" r="6"/> <!-- Head -->
+            <path d="M 54 48 Q 60 42 66 48" fill="currentColor"/> <!-- Hair -->
+            <path d="M 60 42 C 58 40, 62 40, 60 42" stroke="currentColor" fill="none"/> <!-- Retro hair tie -->
+          </g>
+        </svg>
+
+        <!-- Small retro floral corner ornaments inside SVG -->
+        <div class="absolute -bottom-2 -left-2 text-retro-terracotta">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg>
+        </div>
+        <div class="absolute -bottom-2 -right-2 text-retro-terracotta">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <span class="text-sm font-sans tracking-[0.2em] uppercase mt-8 text-retro-orange font-semibold">The Wedding of</span>
+      <h1 class="text-4xl md:text-5xl font-script text-retro-dark mt-2" id="cfg-mempelai-names">Sixtin & Sofyan</h1>
+    </div>
+
+    <!-- Bottom Guest info & Button -->
+    <div class="w-full max-w-sm text-center flex flex-col items-center space-y-6">
+      <div class="space-y-1">
+        <p class="text-xs uppercase tracking-widest text-retro-terracotta">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <p id="guest-name" class="text-lg font-serif font-bold text-retro-dark">Tamu Undangan</p>
+      </div>
+
+      <button id="btn-open-invitation" onclick="openInvitation()" class="px-8 py-3 bg-retro-orange hover:bg-retro-terracotta text-retro-beige font-serif tracking-wider rounded-full shadow-md animate-micro-bounce transition-all duration-300 transform hover:scale-105">
+        Buka Undangan
+      </button>
+    </div>
+  </section>
+
+  <!-- MAIN WRAPPER (HIDDEN INITIALLY) -->
+  <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000">
+
+    <!-- 2. PEMBUKA (Nostalgic Opening) -->
+    <section class="min-h-screen bg-retro-sage bg-opacity-20 flex flex-col justify-center items-center py-20 px-6 relative">
+      <div class="max-w-2xl text-center space-y-8 reveal-on-scroll">
+        <!-- Retro Star/Asterisk SVG -->
+        <div class="flex justify-center">
+          <svg class="w-8 h-8 text-retro-orange animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+          </svg>
+        </div>
+
+        <p class="font-sans text-sm tracking-widest text-retro-orange uppercase font-semibold">Bismillahirrohmanirrohim</p>
+        
+        <h2 class="text-2xl md:text-3xl font-serif text-retro-dark">Assalamu’alaikum Wr. Wb.</h2>
+        
+        <p class="text-sm md:text-base text-retro-dark max-w-lg mx-auto leading-relaxed">
+          Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud untuk mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia pernikahan kami:
+        </p>
+
+        <!-- Quranic Quote Frame -->
+        <div class="border-t border-b border-retro-terracotta border-opacity-40 py-8 px-4 my-8 max-w-lg mx-auto space-y-4">
+          <p class="font-serif italic text-base md:text-lg text-retro-dark" id="cfg-opening-quran">
+            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+          </p>
+          <p class="text-xs tracking-wider uppercase font-semibold text-retro-orange font-sans">- QS. Ar-Rum: 21 -</p>
+        </div>
+
+        <!-- Muslim Poet Quote -->
+        <div class="max-w-md mx-auto italic text-retro-dark text-opacity-80">
+          <p class="text-sm" id="cfg-opening-poetry">
+            "Cinta adalah samudra yang tidak bertepi, dan pernikahan adalah perahu yang membawa kita menjelajahinya dalam berkah-Nya."
+          </p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-retro-terracotta mt-2">- Jalaluddin Rumi -</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROFIL MEMPELAI (The Animated Couple) -->
+    <section class="py-24 px-6 bg-retro-beige relative overflow-hidden">
+      <!-- Decorative Retro Sun/Semi-circle in Background -->
+      <div class="absolute -top-32 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-retro-terracotta opacity-5 rounded-full"></div>
+
+      <div class="max-w-5xl mx-auto flex flex-col items-center">
+        <h2 class="text-3xl md:text-4xl font-serif text-retro-dark tracking-wide mb-16 text-center reveal-on-scroll">Mempelai Berbahagia</h2>
+        
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 items-center relative">
+          
+          <!-- Middle Vintage Line separator -->
+          <div class="hidden md:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[1px] bg-retro-terracotta bg-opacity-30 flex-col justify-between py-10">
+            <div class="w-2 h-2 rounded-full bg-retro-terracotta -translate-x-1/2 left-1/2 relative"></div>
+            <div class="w-2 h-2 rounded-full bg-retro-terracotta -translate-x-1/2 left-1/2 relative"></div>
+          </div>
+
+          <!-- Mempelai Wanita (Sixtin) -->
+          <div class="flex flex-col items-center text-center space-y-6 reveal-on-scroll">
+            <!-- Retro Loop Floral Border around Character -->
+            <div class="w-48 h-48 rounded-full border-2 border-dashed border-retro-terracotta flex items-center justify-center p-4 relative bg-retro-beige">
+              <svg class="w-32 h-32 text-retro-dark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <!-- Hair -->
+                <path d="M 35 45 C 35 25, 65 25, 65 45 Z" fill="currentColor"/>
+                <path d="M 30 50 C 30 45, 70 45, 70 50" stroke="currentColor"/>
+                <!-- Face -->
+                <circle cx="50" cy="50" r="16" fill="#f5efe6" stroke="currentColor"/>
+                <g class="char-eyes">
+                  <circle cx="45" cy="48" r="1" fill="currentColor"/>
+                  <circle cx="55" cy="48" r="1" fill="currentColor"/>
+                </g>
+                <path d="M 47 54 Q 50 57 53 54" stroke="currentColor" fill="none"/> <!-- Smile -->
+                <!-- Blushing -->
+                <circle cx="42" cy="52" r="1.5" fill="pink" opacity="0.6"/>
+                <circle cx="58" cy="52" r="1.5" fill="pink" opacity="0.6"/>
+                <!-- Gown collar -->
+                <path d="M 40 66 Q 50 72 60 66 L 65 85 L 35 85 Z" fill="none" stroke="currentColor"/>
+                <!-- Retro flower holding animation -->
+                <g class="char-arm-female">
+                  <path d="M 35 70 Q 25 65 30 58" fill="none" stroke="currentColor"/>
+                  <!-- Tiny Rose -->
+                  <circle cx="30" cy="58" r="2.5" fill="red" opacity="0.8"/>
+                </g>
+              </svg>
+            </div>
+            
+            <div class="space-y-2">
+              <h3 class="text-3xl font-script text-retro-orange" id="cfg-wanita-fullname">Sixtin Kristiana</h3>
+              <p class="text-sm font-semibold tracking-wider text-retro-terracotta uppercase">Mempelai Wanita</p>
+              <p class="text-sm text-retro-dark max-w-xs mx-auto leading-relaxed" id="cfg-wanita-parents">
+                Putri dari Alm. Bapak Slamet Dalban & Ibu Munarti
+              </p>
+              <p class="text-xs text-retro-terracotta italic" id="cfg-wanita-address">Pagilaran, Kec. Blado, Kab. Batang</p>
+            </div>
+          </div>
+
+          <!-- Mempelai Pria (Sofyan) -->
+          <div class="flex flex-col items-center text-center space-y-6 reveal-on-scroll">
+            <!-- Retro Loop Floral Border around Character -->
+            <div class="w-48 h-48 rounded-full border-2 border-dashed border-retro-terracotta flex items-center justify-center p-4 relative bg-retro-beige">
+              <svg class="w-32 h-32 text-retro-dark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <!-- Hair -->
+                <path d="M 34 40 C 35 20, 65 20, 66 40" stroke="currentColor" stroke-width="3" fill="currentColor"/>
+                <!-- Face -->
+                <circle cx="50" cy="50" r="16" fill="#f5efe6" stroke="currentColor"/>
+                <g class="char-eyes">
+                  <circle cx="45" cy="48" r="1" fill="currentColor"/>
+                  <circle cx="55" cy="48" r="1" fill="currentColor"/>
+                </g>
+                <path d="M 47 54 Q 50 57 53 54" stroke="currentColor" fill="none"/> <!-- Smile -->
+                <!-- Suit collar -->
+                <path d="M 42 66 L 35 85 L 65 85 L 58 66 Z" fill="none" stroke="currentColor"/>
+                <path d="M 50 66 L 50 85" stroke="currentColor"/> <!-- Tie line -->
+                <!-- Adjusting tie animation -->
+                <g class="char-arm-male">
+                  <path d="M 58 70 Q 66 65 62 58" fill="none" stroke="currentColor"/>
+                </g>
+              </svg>
+            </div>
+            
+            <div class="space-y-2">
+              <h3 class="text-3xl font-script text-retro-orange" id="cfg-pria-fullname">Sofyan Kurniadi</h3>
+              <p class="text-sm font-semibold tracking-wider text-retro-terracotta uppercase">Mempelai Pria</p>
+              <p class="text-sm text-retro-dark max-w-xs mx-auto leading-relaxed" id="cfg-pria-parents">
+                Putra dari Bapak [Nama Ayah] & Ibu [Nama Ibu]
+              </p>
+              <p class="text-xs text-retro-terracotta italic" id="cfg-pria-address">Wonokerto, Kec. Bandar, Kab. Batang</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. DETAIL ACARA & HITUNG MUNDUR (The Clean Schedule) -->
+    <section class="py-24 px-6 bg-retro-orange bg-opacity-10 relative overflow-hidden">
+      <!-- Retro sunset element -->
+      <div class="absolute bottom-0 right-0 w-80 h-40 bg-retro-orange bg-opacity-10 rounded-t-full -mr-20 -z-10"></div>
+      
+      <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+        <h2 class="text-3xl md:text-4xl font-serif text-retro-dark tracking-wide mb-6 reveal-on-scroll">Momen Istimewa</h2>
+        <p class="text-sm md:text-base text-retro-dark max-w-md mx-auto mb-12 reveal-on-scroll">Kami tidak sabar untuk berbagi hari indah ini bersama Anda sekalian.</p>
+
+        <!-- COUNTDOWN TIMER -->
+        <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-md w-full mb-16 reveal-on-scroll">
+          <div class="bg-retro-beige border border-retro-terracotta border-opacity-30 rounded-2xl p-4 flex flex-col justify-center items-center shadow-sm">
+            <span id="countdown-days" class="text-3xl md:text-4xl font-serif font-bold text-retro-orange">00</span>
+            <span class="text-xs uppercase tracking-widest text-retro-dark mt-1 font-semibold">Hari</span>
+          </div>
+          <div class="bg-retro-beige border border-retro-terracotta border-opacity-30 rounded-2xl p-4 flex flex-col justify-center items-center shadow-sm">
+            <span id="countdown-hours" class="text-3xl md:text-4xl font-serif font-bold text-retro-orange">00</span>
+            <span class="text-xs uppercase tracking-widest text-retro-dark mt-1 font-semibold">Jam</span>
+          </div>
+          <div class="bg-retro-beige border border-retro-terracotta border-opacity-30 rounded-2xl p-4 flex flex-col justify-center items-center shadow-sm">
+            <span id="countdown-minutes" class="text-3xl md:text-4xl font-serif font-bold text-retro-orange">00</span>
+            <span class="text-xs uppercase tracking-widest text-retro-dark mt-1 font-semibold">Menit</span>
+          </div>
+        </div>
+
+        <!-- EVENTS SCHEDULE (STAGGERED POP-UP) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+          
+          <!-- Akad Nikah Card -->
+          <div class="bg-retro-beige rounded-3xl p-8 border border-retro-terracotta border-opacity-20 flex flex-col items-center justify-between text-center shadow-sm reveal-on-scroll">
+            <div class="space-y-4">
+              <!-- Retro Pocket Watch SVG Icon -->
+              <svg class="w-12 h-12 text-retro-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="13" r="8"/>
+                <path d="M12 5 V9"/>
+                <path d="M10 2 H14"/>
+                <circle cx="12" cy="13" r="1" fill="currentColor"/>
+                <path d="M12 13 L14.5 10.5"/>
+              </svg>
+              <h3 class="text-2xl font-serif text-retro-orange">Akad Nikah</h3>
+              <p class="font-semibold text-sm tracking-wider uppercase text-retro-terracotta" id="cfg-akad-date">Minggu, 7 Juni 2026</p>
+              <p class="text-sm text-retro-dark" id="cfg-akad-time">07.00 - Selesai WIB</p>
+            </div>
+            <div class="mt-6 pt-6 border-t border-retro-terracotta border-opacity-20 w-full">
+              <p class="text-xs uppercase font-semibold text-retro-terracotta mb-1">Lokasi</p>
+              <p class="text-sm text-retro-dark font-medium" id="cfg-akad-loc">Gedung Pertemuan Pagilaran, Keteleng, Kec. Blado, Kab. Batang.</p>
+            </div>
+          </div>
+
+          <!-- Resepsi Card -->
+          <div class="bg-retro-beige rounded-3xl p-8 border border-retro-terracotta border-opacity-20 flex flex-col items-center justify-between text-center shadow-sm reveal-on-scroll">
+            <div class="space-y-4">
+              <!-- Retro Calendar SVG Icon -->
+              <svg class="w-12 h-12 text-retro-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="4" y="5" width="16" height="15" rx="2"/>
+                <line x1="4" y1="10" x2="20" y2="10"/>
+                <line x1="8" y1="3" x2="8" y2="7"/>
+                <line x1="16" y1="3" x2="16" y2="7"/>
+                <circle cx="9" cy="14" r="1" fill="currentColor"/>
+                <circle cx="14" cy="14" r="1" fill="currentColor"/>
+              </svg>
+              <h3 class="text-2xl font-serif text-retro-orange">Resepsi</h3>
+              <p class="font-semibold text-sm tracking-wider uppercase text-retro-terracotta" id="cfg-resep-date">Minggu, 7 Juni 2026</p>
+              <p class="text-sm text-retro-dark" id="cfg-resep-time">11.00 - 13.00 WIB</p>
+            </div>
+            <div class="mt-6 pt-6 border-t border-retro-terracotta border-opacity-20 w-full">
+              <p class="text-xs uppercase font-semibold text-retro-terracotta mb-1">Lokasi</p>
+              <p class="text-sm text-retro-dark font-medium" id="cfg-resep-loc">Gedung Pertemuan Pagilaran, Keteleng, Kec. Blado, Kab. Batang.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. PETA LOKASI DIGITAL (The Minimalist Map) -->
+    <section class="py-24 px-6 bg-retro-beige relative flex flex-col items-center">
+      <div class="max-w-4xl w-full flex flex-col items-center text-center reveal-on-scroll">
+        <h2 class="text-3xl font-serif text-retro-dark mb-6">Petunjuk Lokasi</h2>
+        
+        <!-- Beautiful Sepia/Grayscale Styled Iframe Map -->
+        <div class="w-full h-80 md:h-96 rounded-3xl overflow-hidden border-2 border-retro-terracotta border-opacity-40 shadow-sm relative mb-8">
+          <iframe 
+            id="map-iframe"
+            class="w-full h-full grayscale sepia contrast-125"
+            src="" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- Elegant message block -->
+        <div class="max-w-xl mx-auto space-y-4 mb-8">
+          <p class="text-sm md:text-base text-retro-dark leading-relaxed italic" id="cfg-map-message">
+            "Tanpa mengurangi rasa hormat, kami mengharapkan kehadiran Bapak/Ibu/Saudara/i tepat waktu. Harap berkendara dengan aman, tidak perlu terburu-buru. Semoga Allah SWT memberikan keselamatan dan kelancaran dalam perjalanan Anda menuju tempat acara kami."
+          </p>
+        </div>
+
+        <button onclick="triggerStampAndOpenMap()" class="px-8 py-3 bg-retro-terracotta hover:bg-retro-orange text-retro-beige font-serif tracking-wider rounded-full shadow-md transition-all duration-300 transform hover:scale-105">
+          Buka di Google Maps
+        </button>
+      </div>
+    </section>
+
+    <!-- 6. KISAH CINTA (The Love Journey Timeline) -->
+    <section class="py-24 px-6 bg-retro-sage bg-opacity-10 relative">
+      <div class="max-w-3xl mx-auto flex flex-col items-center">
+        <h2 class="text-3xl md:text-4xl font-serif text-retro-dark tracking-wide mb-16 text-center reveal-on-scroll">Kisah Kasih Kami</h2>
+        
+        <!-- Timeline wrapper -->
+        <div class="relative w-full before:content-[''] before:absolute before:left-4 md:before:left-1/2 before:top-4 before:bottom-4 before:w-[1px] before:bg-retro-terracotta before:opacity-40">
+          
+          <!-- Momen 1 -->
+          <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 items-start mb-16 reveal-on-scroll">
+            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-1 w-8 h-8 rounded-full border border-retro-terracotta bg-retro-beige flex items-center justify-center text-retro-terracotta">
+              <!-- Coffee Cup Icon -->
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+            </div>
+            <div class="md:text-right pr-0 md:pr-12 space-y-2">
+              <span class="text-xs uppercase tracking-widest text-retro-orange font-bold font-sans" id="cfg-m1-date">Januari 2026</span>
+              <h3 class="text-xl font-serif text-retro-dark">Pertemuan Pertama</h3>
+              <p class="text-sm text-retro-dark leading-relaxed" id="cfg-m1-desc">
+                Awal dari segalanya. Langkah awal yang tidak disengaja mempertemukan pandangan kami, menumbuhkan rasa nyaman yang tak biasa.
+              </p>
+            </div>
+          </div>
+
+          <!-- Momen 2 -->
+          <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 items-start mb-16 reveal-on-scroll">
+            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-1 w-8 h-8 rounded-full border border-retro-terracotta bg-retro-beige flex items-center justify-center text-retro-terracotta">
+              <!-- Envelope Icon -->
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="md:col-start-2 pl-0 md:pl-12 space-y-2">
+              <span class="text-xs uppercase tracking-widest text-retro-orange font-bold font-sans" id="cfg-m2-date">Maret 2026</span>
+              <h3 class="text-xl font-serif text-retro-dark">Sebuah Komitmen</h3>
+              <p class="text-sm text-retro-dark leading-relaxed" id="cfg-m2-desc">
+                Menyatukan visi dan hati. Kami sepakat untuk saling bersandar, membawa kedekatan ini ke arah yang diridhai oleh-Nya.
+              </p>
+            </div>
+          </div>
+
+          <!-- Momen 3 -->
+          <div class="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-8 items-start reveal-on-scroll">
+            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-1 w-8 h-8 rounded-full border border-retro-terracotta bg-retro-beige flex items-center justify-center text-retro-terracotta">
+              <!-- Ring Icon -->
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="14" r="6"/><circle cx="12" cy="5" r="3"/></svg>
+            </div>
+            <div class="md:text-right pr-0 md:pr-12 space-y-2">
+              <span class="text-xs uppercase tracking-widest text-retro-orange font-bold font-sans" id="cfg-m3-date">Mei 2026</span>
+              <h3 class="text-xl font-serif text-retro-dark">Ikatan Suci (Lamaran)</h3>
+              <p class="text-sm text-retro-dark leading-relaxed" id="cfg-m3-desc">
+                Ikatan suci dimulai. Pertemuan dua keluarga besar yang saling menguatkan tekad kami untuk melangkah bersama menuju pelaminan.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. RSVP / KONFIRMASI KEHADIRAN & BUKU TAMU (Flat Interactive Wall) -->
+    <section class="py-24 px-6 bg-retro-beige relative">
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+        
+        <!-- Form RSVP -->
+        <div class="space-y-6 reveal-on-scroll">
+          <div class="space-y-2">
+            <h2 class="text-3xl font-serif text-retro-dark">Konfirmasi Kehadiran</h2>
+            <p class="text-xs uppercase tracking-widest text-retro-terracotta font-semibold">Bantu kami mempersiapkan sambutan terbaik</p>
+          </div>
+
+          <form id="rsvp-form" onsubmit="submitRSVP(event)" class="space-y-4 relative overflow-hidden">
+            <div>
+              <label for="rsvp-name" class="block text-xs uppercase font-semibold text-retro-dark mb-1">Nama Lengkap</label>
+              <input type="text" id="rsvp-name" required class="w-full px-4 py-3 bg-transparent border border-retro-terracotta rounded-xl focus:outline-none focus:ring-1 focus:ring-retro-orange text-retro-dark text-sm" placeholder="Contoh: Nama Tamu">
+            </div>
+
+            <div>
+              <label for="rsvp-status" class="block text-xs uppercase font-semibold text-retro-dark mb-1">Konfirmasi Kehadiran</label>
+              <select id="rsvp-status" required class="w-full px-4 py-3 bg-retro-beige border border-retro-terracotta rounded-xl focus:outline-none focus:ring-1 focus:ring-retro-orange text-retro-dark text-sm">
+                <option value="Ya, Saya Hadir">Ya, Saya Hadir</option>
+                <option value="Maaf, Tidak Bisa Hadir">Maaf, Tidak Bisa Hadir</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="rsvp-guests" class="block text-xs uppercase font-semibold text-retro-dark mb-1">Jumlah Tamu</label>
+              <select id="rsvp-guests" class="w-full px-4 py-3 bg-retro-beige border border-retro-terracotta rounded-xl focus:outline-none focus:ring-1 focus:ring-retro-orange text-retro-dark text-sm">
+                <option value="1">1 Orang</option>
+                <option value="2">2 Orang</option>
+                <option value="3">3 Orang</option>
+              </select>
+            </div>
+
+            <button type="submit" class="w-full py-3 bg-retro-orange hover:bg-retro-terracotta text-retro-beige font-serif tracking-wider rounded-xl shadow-sm transition-all duration-300 transform active:scale-95 flex items-center justify-center space-x-2 relative">
+              <span>Kirim Konfirmasi</span>
+              <!-- Paper Airplane SVG inside button -->
+              <svg id="paper-plane" class="w-4 h-4 text-retro-beige transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Buku Tamu / Ucapan -->
+        <div class="space-y-6 flex flex-col justify-between reveal-on-scroll">
+          <div class="space-y-2">
+            <h2 class="text-3xl font-serif text-retro-dark">Buku Tamu Digital</h2>
+            <p class="text-xs uppercase tracking-widest text-retro-terracotta font-semibold">Tinggalkan pesan manis & doa restu</p>
+          </div>
+
+          <!-- Wishlist Input -->
+          <div class="space-y-3">
+            <textarea id="guest-wish" rows="3" required class="w-full px-4 py-3 bg-transparent border border-retro-terracotta rounded-xl focus:outline-none focus:ring-1 focus:ring-retro-orange text-retro-dark text-sm" placeholder="Tuliskan harapan terbaik Anda di sini..."></textarea>
+            <button onclick="submitWish()" class="px-6 py-2 bg-retro-terracotta hover:bg-retro-orange text-retro-beige font-serif tracking-wide text-xs rounded-xl shadow-sm transition-all duration-300">Kirim Ucapan</button>
+          </div>
+
+          <!-- Wishes Stream (Vintage Styled Letters) -->
+          <div class="h-64 overflow-y-auto space-y-4 pr-2 mt-4" id="wishes-container">
+            <!-- Simulated starting wishes -->
+            <div class="bg-retro-orange bg-opacity-5 p-4 rounded-2xl border border-retro-terracotta border-opacity-10 space-y-1">
+              <p class="font-serif font-bold text-sm text-retro-dark">Andi & Siska</p>
+              <p class="text-xs text-retro-dark text-opacity-80">Selamat Sixtin dan Sofyan! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Maaf belum bisa hadir langsung, tapi doa terbaik menyertai langkah kalian berdua.</p>
+            </div>
+            <div class="bg-retro-orange bg-opacity-5 p-4 rounded-2xl border border-retro-terracotta border-opacity-10 space-y-1">
+              <p class="font-serif font-bold text-sm text-retro-dark">Bude Munawaroh</p>
+              <p class="text-xs text-retro-dark text-opacity-80">Alhamdulillah, selamat ya buat keponakan tercinta. Lancar terus sampai hari H ya, berkah berlimpah rejeki.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. KADO DIGITAL / TANDA KASIH (The Elegant Gift Card) -->
+    <section class="py-24 px-6 bg-retro-orange bg-opacity-10 relative overflow-hidden">
+      <div class="max-w-4xl mx-auto flex flex-col items-center">
+        <h2 class="text-3xl font-serif text-retro-dark tracking-wide mb-6 text-center reveal-on-scroll">Tanda Kasih</h2>
+        <p class="text-sm md:text-base text-retro-dark max-w-lg mx-auto text-center mb-12 leading-relaxed reveal-on-scroll" id="cfg-gift-intro">
+          "Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih untuk mengiringi langkah baru kami, dapat melalui:"
+        </p>
+
+        <!-- CARDS CONTAINER -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
+          
+          <!-- Bank Account Pria -->
+          <div class="bg-retro-beige rounded-3xl p-6 border border-retro-terracotta border-opacity-20 shadow-sm flex flex-col justify-between space-y-6 reveal-on-scroll">
+            <div class="flex justify-between items-start">
+              <div class="space-y-1">
+                <p class="text-xs uppercase font-semibold text-retro-terracotta">BANK TRANSFER</p>
+                <h3 class="text-lg font-serif font-bold text-retro-dark" id="cfg-gift-bank-name-1">BANK MANDIRI</h3>
+              </div>
+              <!-- Minimalist Retro card chip SVG -->
+              <svg class="w-8 h-8 text-retro-terracotta" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="2" y="4" width="20" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+                <line x1="7" y1="10" x2="7" y2="20"/>
+              </svg>
+            </div>
+            
+            <div class="space-y-1">
+              <p class="text-xs text-retro-dark text-opacity-60">Nomor Rekening</p>
+              <p class="text-xl font-bold font-serif text-retro-orange tracking-widest" id="cfg-gift-acc-num-1">1390022445566</p>
+              <p class="text-sm text-retro-dark" id="cfg-gift-acc-owner-1">Sofyan Kurniadi</p>
+            </div>
+
+            <button onclick="copyToClipboard('1390022445566')" class="w-full py-2 bg-retro-terracotta hover:bg-retro-orange text-retro-beige rounded-xl text-xs font-serif tracking-wider transition-colors duration-300">
+              Salin Rekening
+            </button>
+          </div>
+
+          <!-- Bank Account Wanita -->
+          <div class="bg-retro-beige rounded-3xl p-6 border border-retro-terracotta border-opacity-20 shadow-sm flex flex-col justify-between space-y-6 reveal-on-scroll">
+            <div class="flex justify-between items-start">
+              <div class="space-y-1">
+                <p class="text-xs uppercase font-semibold text-retro-terracotta">BANK TRANSFER</p>
+                <h3 class="text-lg font-serif font-bold text-retro-dark" id="cfg-gift-bank-name-2">BANK BCA</h3>
+              </div>
+              <svg class="w-8 h-8 text-retro-terracotta" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="2" y="4" width="20" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+                <line x1="7" y1="10" x2="7" y2="20"/>
+              </svg>
+            </div>
+            
+            <div class="space-y-1">
+              <p class="text-xs text-retro-dark text-opacity-60">Nomor Rekening</p>
+              <p class="text-xl font-bold font-serif text-retro-orange tracking-widest" id="cfg-gift-acc-num-2">0987654321</p>
+              <p class="text-sm text-retro-dark" id="cfg-gift-acc-owner-2">Sixtin Kristiana</p>
+            </div>
+
+            <button onclick="copyToClipboard('0987654321')" class="w-full py-2 bg-retro-terracotta hover:bg-retro-orange text-retro-beige rounded-xl text-xs font-serif tracking-wider transition-colors duration-300">
+              Salin Rekening
+            </button>
+          </div>
+
+        </div>
+
+        <!-- PHYSICAL ADDRESS FOR GIFTS -->
+        <div class="mt-12 bg-retro-beige rounded-3xl p-6 border border-retro-terracotta border-opacity-20 shadow-sm w-full max-w-2xl text-center space-y-4 reveal-on-scroll">
+          <p class="text-xs uppercase font-semibold text-retro-terracotta tracking-wider">Kirim Kado Fisik</p>
+          <div class="space-y-1">
+            <p class="text-base font-serif font-bold text-retro-dark" id="cfg-shipping-name">Sixtin Kristiana</p>
+            <p class="text-sm text-retro-dark max-w-md mx-auto leading-relaxed" id="cfg-shipping-address">
+              Dukuh Pagilaran RT 02 / RW 01, Desa Keteleng, Kecamatan Blado, Kabupaten Batang, Jawa Tengah (Kode Pos: 51255)
+            </p>
+          </div>
+          <button onclick="copyToClipboard('Sixtin Kristiana, Dukuh Pagilaran RT 02 / RW 01, Desa Keteleng, Kecamatan Blado, Kabupaten Batang, Jawa Tengah')" class="px-6 py-2 bg-retro-terracotta hover:bg-retro-orange text-retro-beige rounded-xl text-xs font-serif tracking-wider transition-colors duration-300">
+            Salin Alamat
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. HALAMAN PENUTUP (The Timeless Closing) -->
+    <section class="py-24 px-6 bg-retro-beige relative flex flex-col justify-center items-center overflow-hidden">
+      <!-- Background Circles -->
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-retro-terracotta border-opacity-10 rounded-full"></div>
+      
+      <div class="max-w-2xl text-center space-y-10 z-10 reveal-on-scroll">
+        <!-- Re-appearing animated Character pair bowing -->
+        <div class="flex justify-center">
+          <svg class="w-40 h-40 text-retro-dark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+            <!-- Female character -->
+            <g transform="translate(-10, 0)">
+              <circle cx="40" cy="40" r="10"/>
+              <!-- Bowing body -->
+              <path d="M 40 50 Q 30 70 35 90" fill="none" stroke="currentColor"/>
+              <g class="char-eyes">
+                <circle cx="37" cy="38" r="0.8" fill="currentColor"/>
+                <circle cx="43" cy="38" r="0.8" fill="currentColor"/>
+              </g>
+              <!-- Hair -->
+              <path d="M 30 40 Q 40 30 50 40" stroke="currentColor" fill="currentColor"/>
+            </g>
+            <!-- Male character waving -->
+            <g transform="translate(15, 0)">
+              <circle cx="45" cy="40" r="10"/>
+              <!-- Body -->
+              <path d="M 45 50 Q 50 70 45 90" fill="none" stroke="currentColor"/>
+              <g class="char-eyes">
+                <circle cx="42" cy="38" r="0.8" fill="currentColor"/>
+                <circle cx="48" cy="38" r="0.8" fill="currentColor"/>
+              </g>
+              <!-- Waving arm -->
+              <g class="char-arm-male">
+                <path d="M 55 50 L 65 35" fill="none" stroke="currentColor"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <p class="text-sm md:text-base text-retro-dark leading-relaxed italic max-w-lg mx-auto" id="cfg-closing-msg">
+          "Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu bagi lembaran baru kehidupan kami."
+        </p>
+
+        <div class="space-y-4">
+          <p class="text-sm tracking-widest uppercase font-bold text-retro-orange font-sans">Wassalamu’alaikum Wr. Wb.</p>
+          
+          <div class="space-y-1">
+            <p class="text-xs text-retro-terracotta font-semibold uppercase tracking-widest">Keluarga Besar Kami</p>
+            <p class="text-sm text-retro-dark font-medium" id="cfg-family-names">
+              Keluarga Besar Bapak Alm. Slamet Dalban & Ibu Munarti <br> & <br> Keluarga Besar Bapak [Nama Keluarga Pria]
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="font-script text-4xl text-retro-dark mt-8">Sixtin & Sofyan</p>
+        </div>
+
+        <!-- Tiny Footer -->
+        <div class="pt-16 opacity-60">
+          <p class="text-[10px] tracking-widest uppercase font-semibold text-retro-dark font-sans" id="cfg-footer">Design by Lang Studio</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // CONFIGURATION OBJECT (EASY TO EDIT)
+    // ==========================================
+    const CONFIG = {
+      // Background Music JKT48 Rapsodi (Replace with actual link when ready)
+      // Royalty Free / Direct Streamable Retro Instrumental used as fallback
+      audioSource: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", 
+      
+      // General Header
+      mempelaiNames: "Sixtin & Sofyan",
+      
+      // Quotes & Sayings
+      openingQuran: `"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."`,
+      openingPoetry: `"Cinta adalah samudra yang tidak bertepi, dan pernikahan adalah perahu yang membawa kita menjelajahinya dalam berkah-Nya."`,
+      closingMsg: `"Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu..."`,
+      familyNames: "Keluarga Besar Alm. Bapak Slamet Dalban & Ibu Munarti (Pagilaran) <br> & <br> Keluarga Besar Bapak [Nama Ayah Pria] & Ibu [Nama Ibu Pria] (Wonokerto)",
+      
+      // Bride & Groom Details
+      bride: {
+        fullname: "Sixtin Kristiana",
+        parents: "Putri dari Alm. Bapak Slamet Dalban & Ibu Munarti",
+        address: "Pagilaran, Kec. Blado, Kab. Batang"
+      },
+      groom: {
+        fullname: "Sofyan Kurniadi",
+        parents: "Putra dari Bapak [Nama Ayah Pria] & Ibu [Nama Ibu Pria]",
+        address: "Wonokerto, Kec. Bandar, Kab. Batang"
+      },
+
+      // Dates and Locations
+      akad: {
+        date: "Minggu, 7 Juni 2026",
+        time: "07.00 - Selesai WIB",
+        loc: "Gedung Pertemuan Pagilaran, Keteleng, Kec. Blado, Kab. Batang."
+      },
+      resep: {
+        date: "Minggu, 7 Juni 2026",
+        time: "11.00 - 13.00 WIB",
+        loc: "Gedung Pertemuan Pagilaran, Keteleng, Kec. Blado, Kab. Batang."
+      },
+      
+      // Date target for countdown (Format: YYYY-MM-DDTHH:MM:SS)
+      targetCountdownDate: "2026-06-07T07:00:00",
+
+      // Maps Link and embed config
+      mapUrl: "https://maps.app.goo.gl/9R288vBf4Xun3qfe8", // Replace with real location URL
+      mapEmbedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15833.013531641571!2d109.8130843!3d-7.1432243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7019623e803ca1%3s0x2e7019623e803ca1!2sKeteleng%2C%20Blado%2C%20Batang%20Regency%2C%20Central%20Java!5e0!3m2!1sid!2sid!4v1700000000000",
+      mapMessage: `"Tanpa mengurangi rasa hormat, kami mengharapkan kehadiran Bapak/Ibu/Saudara/i tepat waktu. Harap berkendara dengan aman, tidak perlu terburu-buru. Semoga Allah SWT memberikan keselamatan dan kelancaran dalam perjalanan Anda menuju tempat acara kami."`,
+
+      // Love Journey Details
+      m1: {
+        date: "Januari 2026",
+        desc: "Awal dari segalanya. Langkah awal yang tidak disengaja mempertemukan pandangan kami, menumbuhkan rasa nyaman yang tak biasa."
+      },
+      m2: {
+        date: "Maret 2026",
+        desc: "Menyatukan visi dan hati. Kami sepakat untuk saling bersandar, membawa kedekatan ini ke arah yang diridhai oleh-Nya."
+      },
+      m3: {
+        date: "Mei 2026",
+        desc: "Ikatan suci dimulai. Pertemuan dua keluarga besar yang saling menguatkan tekad kami untuk melangkah bersama menuju pelaminan."
+      },
+
+      // Gift Cards & Shipments
+      gift1: {
+        bankName: "BANK MANDIRI",
+        accNum: "1390022445566",
+        accOwner: "Sofyan Kurniadi"
+      },
+      gift2: {
+        bankName: "BANK BCA",
+        accNum: "0987654321",
+        accOwner: "Sixtin Kristiana"
+      },
+      shipping: {
+        name: "Sixtin Kristiana",
+        address: "Dukuh Pagilaran RT 02 / RW 01, Desa Keteleng, Kecamatan Blado, Kabupaten Batang, Jawa Tengah (Kode Pos: 51255)"
+      },
+
+      // Footer
+      footer: "Design by Lang Studio"
+    };
+
+    // ==========================================
+    // INITIALIZATION & DYNAMIC GUEST
+    // ==========================================
+    window.onload = function() {
+      // Bind configurations to elements
+      document.getElementById('cfg-mempelai-names').innerText = CONFIG.mempelaiNames;
+      document.getElementById('cfg-opening-quran').innerText = CONFIG.openingQuran;
+      document.getElementById('cfg-opening-poetry').innerText = CONFIG.openingPoetry;
+      
+      document.getElementById('cfg-wanita-fullname').innerText = CONFIG.bride.fullname;
+      document.getElementById('cfg-wanita-parents').innerText = CONFIG.bride.parents;
+      document.getElementById('cfg-wanita-address').innerText = CONFIG.bride.address;
+      
+      document.getElementById('cfg-pria-fullname').innerText = CONFIG.groom.fullname;
+      document.getElementById('cfg-pria-parents').innerText = CONFIG.groom.parents;
+      document.getElementById('cfg-pria-address').innerText = CONFIG.groom.address;
+      
+      document.getElementById('cfg-akad-date').innerText = CONFIG.akad.date;
+      document.getElementById('cfg-akad-time').innerText = CONFIG.akad.time;
+      document.getElementById('cfg-akad-loc').innerText = CONFIG.akad.loc;
+      
+      document.getElementById('cfg-resep-date').innerText = CONFIG.resep.date;
+      document.getElementById('cfg-resep-time').innerText = CONFIG.resep.time;
+      document.getElementById('cfg-resep-loc').innerText = CONFIG.resep.loc;
+
+      document.getElementById('map-iframe').src = CONFIG.mapEmbedSrc;
+      document.getElementById('cfg-map-message').innerText = CONFIG.mapMessage;
+
+      document.getElementById('cfg-m1-date').innerText = CONFIG.m1.date;
+      document.getElementById('cfg-m1-desc').innerText = CONFIG.m1.desc;
+      document.getElementById('cfg-m2-date').innerText = CONFIG.m2.date;
+      document.getElementById('cfg-m2-desc').innerText = CONFIG.m2.desc;
+      document.getElementById('cfg-m3-date').innerText = CONFIG.m3.date;
+      document.getElementById('cfg-m3-desc').innerText = CONFIG.m3.desc;
+
+      document.getElementById('cfg-gift-bank-name-1').innerText = CONFIG.gift1.bankName;
+      document.getElementById('cfg-gift-acc-num-1').innerText = CONFIG.gift1.accNum;
+      document.getElementById('cfg-gift-acc-owner-1').innerText = CONFIG.gift1.accOwner;
+
+      document.getElementById('cfg-gift-bank-name-2').innerText = CONFIG.gift2.bankName;
+      document.getElementById('cfg-gift-acc-num-2').innerText = CONFIG.gift2.accNum;
+      document.getElementById('cfg-gift-acc-owner-2').innerText = CONFIG.gift2.accOwner;
+
+      document.getElementById('cfg-shipping-name').innerText = CONFIG.shipping.name;
+      document.getElementById('cfg-shipping-address').innerText = CONFIG.shipping.address;
+
+      document.getElementById('cfg-closing-msg').innerText = CONFIG.closingMsg;
+      document.getElementById('cfg-family-names').innerHTML = CONFIG.familyNames;
+      document.getElementById('cfg-footer').innerText = CONFIG.footer;
+
+      // Audio configuration
+      const audio = document.getElementById('bg-music');
+      audio.src = CONFIG.audioSource;
+
+      // Load Guest Dynamic Name (Supports Google Spreadsheet links e.g. /?to=Nama+Tamu)
+      const urlParams = new URLSearchParams(window.location.search);
+      const guestName = urlParams.get('to');
+      if (guestName) {
+        document.getElementById('guest-name').innerText = decodeURIComponent(guestName.replace(/\+/g, ' '));
+      } else {
+        document.getElementById('guest-name').innerText = "Tamu Undangan";
+      }
+
+      // Start Countdown
+      startCountdown();
+
+      // Trigger reveal on scroll initiation
+      window.addEventListener('scroll', revealElements);
+      revealElements();
+    };
+
+    // ==========================================
+    // COVER OPENING TRANSITION & MUSIC
+    // ==========================================
+    function openInvitation() {
+      const cover = document.getElementById('cover-page');
+      const main = document.getElementById('main-content');
+      const controller = document.getElementById('music-controller');
+      const audio = document.getElementById('bg-music');
+
+      // Play music (Required to be triggered by user gesture)
+      audio.play().catch(e => console.log("Autoplay blocked/waiting for user gesture."));
+      document.getElementById('vinyl-record').classList.add('animate-vinyl');
+
+      // Fluid Smooth Slide-up and fade-out transition
+      cover.classList.add('liquid-open', '-translate-y-full', 'opacity-0');
+      
+      // Reveal Main content
+      main.classList.remove('hidden');
+      setTimeout(() => {
+        main.classList.remove('opacity-0');
+        controller.classList.remove('hidden');
+        revealElements();
+      }, 100);
+
+      // Free cover element after animation concludes to prevent interference
+      setTimeout(() => {
+        cover.style.display = 'none';
+      }, 1200);
+    }
+
+    // ==========================================
+    // MUSIC CONTROL LOGIC
+    // ==========================================
+    function toggleMusic() {
+      const audio = document.getElementById('bg-music');
+      const vinyl = document.getElementById('vinyl-record');
+      
+      if (audio.paused) {
+        audio.play();
+        vinyl.classList.add('animate-vinyl');
+        showToast("Musik diputar");
+      } else {
+        audio.pause();
+        vinyl.classList.remove('animate-vinyl');
+        showToast("Musik dihentikan");
+      }
+    }
+
+    // ==========================================
+    // COUNTDOWN TIMER LOGIC
+    // ==========================================
+    function startCountdown() {
+      const target = new Date(CONFIG.targetCountdownDate).getTime();
+
+      setInterval(function() {
+        const now = new Date().getTime();
+        const difference = target - now;
+
+        if (difference > 0) {
+          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+          document.getElementById('countdown-days').innerText = days < 10 ? '0' + days : days;
+          document.getElementById('countdown-hours').innerText = hours < 10 ? '0' + hours : hours;
+          document.getElementById('countdown-minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        } else {
+          document.getElementById('countdown-days').innerText = "00";
+          document.getElementById('countdown-hours').innerText = "00";
+          document.getElementById('countdown-minutes').innerText = "00";
+        }
+      }, 1000);
+    }
+
+    // ==========================================
+    // SCROLL REVEAL ENGINE
+    // ==========================================
+    function revealElements() {
+      const reveals = document.querySelectorAll('.reveal-on-scroll');
+      const windowHeight = window.innerHeight;
+
+      reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if (elementTop < windowHeight - revealPoint) {
+          el.classList.add('active');
+        }
+      });
+    }
+
+    // ==========================================
+    // MAP TRANSITION OVERLAY STAMP EFFECT
+    // ==========================================
+    function triggerStampAndOpenMap() {
+      const overlay = document.getElementById('stamp-overlay');
+      const box = document.getElementById('stamp-box');
+
+      overlay.classList.remove('pointer-events-none');
+      overlay.classList.add('opacity-100');
+      box.classList.remove('scale-50');
+      box.classList.add('scale-100');
+
+      // Wait 1.5 seconds then open the google map link in new tab and fade out overlay
+      setTimeout(() => {
+        window.open(CONFIG.mapUrl, '_blank');
+        
+        // Return back to normal
+        setTimeout(() => {
+          overlay.classList.add('pointer-events-none');
+          overlay.classList.remove('opacity-100');
+          box.classList.add('scale-50');
+          box.classList.remove('scale-100');
+        }, 300);
+      }, 1500);
+    }
+
+    // ==========================================
+    // RSVP FORM & FLYING AIRPLANE ANIMATION
+    // ==========================================
+    function submitRSVP(event) {
+      event.preventDefault();
+      const plane = document.getElementById('paper-plane');
+      const form = document.getElementById('rsvp-form');
+      const name = document.getElementById('rsvp-name').value;
+      const status = document.getElementById('rsvp-status').value;
+      const guests = document.getElementById('rsvp-guests').value;
+
+      // Trigger paper airplane flying animation
+      plane.classList.add('plane-fly');
+
+      setTimeout(() => {
+        // Show Success Toast
+        showToast("Kehadiran Anda berhasil dikirim!");
+        
+        // Reset animation and form
+        plane.classList.remove('plane-fly');
+        form.reset();
+
+        // Dynamically add a temporary guest entry to wishes wall to mimic submission
+        const wishesContainer = document.getElementById('wishes-container');
+        const newWish = document.createElement('div');
+        newWish.className = "bg-retro-orange bg-opacity-5 p-4 rounded-2xl border border-retro-terracotta border-opacity-10 space-y-1 transform scale-95 opacity-0 transition-all duration-500";
+        newWish.innerHTML = `
+          <p class="font-serif font-bold text-sm text-retro-dark">${name} <span class="text-xs font-sans text-retro-terracotta font-normal">(${status} - ${guests} Orang)</span></p>
+          <p class="text-xs text-retro-dark text-opacity-80 italic">Mengirimkan konfirmasi kehadiran melalui RSVP digital.</p>
+        `;
+        wishesContainer.prepend(newWish);
+        setTimeout(() => {
+          newWish.classList.remove('scale-95', 'opacity-0');
+        }, 100);
+
+      }, 1500);
+    }
+
+    // ==========================================
+    // MANUAL WISHLIST SUBMISSION
+    // ==========================================
+    function submitWish() {
+      const wishText = document.getElementById('guest-wish').value;
+      const guestName = document.getElementById('guest-name').innerText;
+
+      if (!wishText.trim()) {
+        showToast("Tulis ucapan terlebih dahulu");
+        return;
+      }
+
+      const wishesContainer = document.getElementById('wishes-container');
+      const newWish = document.createElement('div');
+      newWish.className = "bg-retro-orange bg-opacity-5 p-4 rounded-2xl border border-retro-terracotta border-opacity-10 space-y-1 transform scale-95 opacity-0 transition-all duration-500";
+      newWish.innerHTML = `
+        <p class="font-serif font-bold text-sm text-retro-dark">${guestName}</p>
+        <p class="text-xs text-retro-dark text-opacity-80">${wishText}</p>
+      `;
+      wishesContainer.prepend(newWish);
+
+      setTimeout(() => {
+        newWish.classList.remove('scale-95', 'opacity-0');
+        document.getElementById('guest-wish').value = "";
+        showToast("Ucapan terkirim!");
+      }, 100);
+    }
+
+    // ==========================================
+    // UTILITY: COPY TO CLIPBOARD & TOAST
+    // ==========================================
+    function copyToClipboard(text) {
+      // Robust fallbacks for browser iFrame restrictions
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+
+      showToast("Berhasil disalin ke papan klip!");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
